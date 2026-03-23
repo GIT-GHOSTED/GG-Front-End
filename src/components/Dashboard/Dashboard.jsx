@@ -39,6 +39,13 @@ export default function Dashboard() {
     },
   ];
 
+  // Dummy follow-ups
+  const followUps = [
+    { company: "Google", role: "Senior Frontend Engineer", date: "2026-03-25" },
+    { company: "Amazon", role: "Product Designer", date: "2026-03-27" },
+    { company: "Meta", role: "Fullstack Developer", date: "2026-03-30" },
+  ];
+
   const COLORS = ["#8884d8", "#ffc658", "#82ca9d", "#ff6b6b"];
 
   return (
@@ -52,30 +59,39 @@ export default function Dashboard() {
         <DataBox number={3} tag={"Follow Ups"} />
       </section>
 
-      {/* STATUS BREAKDOWN */}
-      <section className="pieChartSection">
-        <h3>Status Breakdown</h3>
+      <section className="topRow">
+        {/* Pie Chart Section */}
+        <section className="pieChartSection">
+          <h3>Status Breakdown</h3>
 
-        {/* Implementing the PieChart component */}
-        <PieChart width={500} height={200}>
-          <Pie
-            data={statusData}
-            cx="30%"
-            cy="50%"
-            outerRadius={100}
-            dataKey="value"
-          >
-            {statusData.map((entry, index) => (
-              <Cell key={index} fill={COLORS[index % COLORS.length]} />
-            ))}
-          </Pie>
+          <PieChart width={400} height={200}>
+            <Pie
+              data={statusData}
+              cx="30%"
+              cy="50%"
+              outerRadius={90}
+              dataKey="value"
+            >
+              {statusData.map((entry, index) => (
+                <Cell key={index} fill={COLORS[index % COLORS.length]} />
+              ))}
+            </Pie>
 
-          <Tooltip />
+            <Tooltip />
+            <Legend layout="vertical" verticalAlign="middle" align="left" />
+          </PieChart>
+        </section>
 
-          <Legend layout="vertical" verticalAlign="middle" align="left" />
-        </PieChart>
+        {/* Follow-ups Section*/}
+        <section className="followUpsSection">
+          <h3>Upcoming Follow-ups</h3>
+          <ul>
+            <FollowUps followUps={followUps} />
+          </ul>
+        </section>
       </section>
 
+      {/* Recent Applications Section  */}
       <section className="recentApps">
         <h3>Recent Activity</h3>
         <ul>
@@ -86,6 +102,8 @@ export default function Dashboard() {
     </section>
   );
 }
+
+//* ------------------ COMPONENTS--------------------
 
 function DataBox({ number, tag }) {
   return (
@@ -106,6 +124,20 @@ function RecentActivity({ recentApps }) {
       <section>
         <p>{currApp.date}</p>
         <p>{currApp.status}</p>
+      </section>
+    </li>
+  ));
+}
+
+function FollowUps({ followUps }) {
+  return followUps.map((currItem, index) => (
+    <li className="recentAppList" key={index}>
+      <section>
+        <p>{currItem.company}</p>
+        <p>{currItem.role}</p>
+      </section>
+      <section>
+        <p>{currItem.date}</p>
       </section>
     </li>
   ));
