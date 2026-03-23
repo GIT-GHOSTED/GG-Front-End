@@ -67,7 +67,9 @@ export default function Applications() {
       </ul>
       {/* ADDING BUTTON TO CREATE NEW APP */}
       <button onClick={() => setShowForm(!showForm)}>New Application</button>
-      {showForm && <NewApplicationForm />}
+      {showForm && (
+        <NewApplicationForm showForm={showForm} setShowForm={setShowForm} />
+      )}
     </section>
   );
 }

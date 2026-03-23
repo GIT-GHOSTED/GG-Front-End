@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./NewApplicationForm.css";
 
-export default function NewApplicationForm() {
+export default function NewApplicationForm({ showForm, setShowForm }) {
   const [formData, setFormData] = useState({
     company: "",
     role: "",
@@ -125,7 +125,9 @@ export default function NewApplicationForm() {
 
         <section className="formActions">
           <button type="submit">Save</button>
-          <button type="button">Cancel</button>
+          <button type="button" onClick={() => setShowForm(!showForm)}>
+            Cancel
+          </button>
         </section>
       </form>
     </section>
