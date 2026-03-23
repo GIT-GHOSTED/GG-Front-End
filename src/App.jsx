@@ -11,6 +11,8 @@ export default function App() {
       <main>
         <Routes>
           <Route path="/" element={<Homepage />} />
+          <Route path="/register" element={<Register setToken={setToken} />} />
+          <Route path="/login" element={<LogIn setToken={setToken} />} />
         </Routes>
       </main>
     </>
