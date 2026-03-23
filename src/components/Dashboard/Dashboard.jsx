@@ -11,12 +11,39 @@ export default function Dashboard() {
     { name: "Rejected", value: 3 },
   ];
 
+  // Dummy recent applications
+  const recentApps = [
+    {
+      company: "Netflix",
+      role: "Frontend Dev",
+      date: "2026-03-21",
+      status: "Interviewed",
+    },
+    {
+      company: "Apple",
+      role: "UI Engineer",
+      date: "2026-03-20",
+      status: "Applied",
+    },
+    {
+      company: "Tesla",
+      role: "Software Eng",
+      date: "2026-03-19",
+      status: "Rejected",
+    },
+    {
+      company: "Spotify",
+      role: "Web Dev",
+      date: "2026-03-18",
+      status: "Rejected",
+    },
+  ];
+
   const COLORS = ["#8884d8", "#ffc658", "#82ca9d", "#ff6b6b"];
 
   return (
     <section style={{ padding: "1rem" }}>
       <h2>Dashboard</h2>
-      <p>Welcome back. Use the links below to manage your applications.</p>
 
       <section className="appDetails">
         <DataBox number={7} tag={"Active"} />
@@ -26,33 +53,36 @@ export default function Dashboard() {
       </section>
 
       {/* STATUS BREAKDOWN */}
-      <section className="dashboardSection">
+      <section className="pieChartSection">
         <h3>Status Breakdown</h3>
 
-        <PieChart width={300} height={300}>
+        {/* Implementing the PieChart component */}
+        <PieChart width={500} height={200}>
           <Pie
             data={statusData}
-            cx="50%"
+            cx="30%"
             cy="50%"
             outerRadius={100}
             dataKey="value"
-            label
           >
-            {/* Applies a color to the corresponding index/"data" in "statusData" */}
             {statusData.map((entry, index) => (
               <Cell key={index} fill={COLORS[index % COLORS.length]} />
             ))}
           </Pie>
+
           <Tooltip />
-          <Legend />
+
+          <Legend layout="vertical" verticalAlign="middle" align="left" />
         </PieChart>
       </section>
 
-      {/* NAV LINKS */}
-      <div style={{ display: "flex", gap: "0.75rem" }}>
-        <Link to="/applications">All applications</Link>
-        <Link to="/applications/new">Add application</Link>
-      </div>
+      <section className="recentApps">
+        <h3>Recent Activity</h3>
+        <ul>
+          {/* Component that renders list of recent applications completed */}
+          <RecentActivity recentApps={recentApps} />
+        </ul>
+      </section>
     </section>
   );
 }
@@ -64,4 +94,19 @@ function DataBox({ number, tag }) {
       <p>{number}</p>
     </section>
   );
+}
+
+function RecentActivity({ recentApps }) {
+  return recentApps.map((currApp, index) => (
+    <li className="recentAppList" key={index}>
+      <section>
+        <p>{currApp.company}</p>
+        <p>{currApp.role}</p>
+      </section>
+      <section>
+        <p>{currApp.date}</p>
+        <p>{currApp.status}</p>
+      </section>
+    </li>
+  ));
 }
