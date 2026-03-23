@@ -1,14 +1,14 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router";
 import Navbar from "./components/Navbar";
 import Homepage from "./components/Homepage";
 import Register from "./components/Register";
 import LogIn from "./components/LogIn";
-import Layout from "./components/Layout";
 import Dashboard from "./components/Dashboard/Dashboard";
 import Applications from "./components/Applications";
-import NewApplication from "./components/NewApplication";
 import ApplicationDetail from "./components/ApplicationDetail";
 import EditApplication from "./components/EditApplication";
+import Layout from "./components/Layout";
+import { useState } from "react";
 
 export default function App() {
   // Step 1: Initialize auth token state from localStorage so refreshes keep login state.
@@ -39,9 +39,6 @@ export default function App() {
 
             {/* Step 6b: Protected applications list page. */}
             <Route path="/applications" element={<Applications />} />
-
-            {/* Step 6c: Protected create-application page. */}
-            <Route path="/applications/new" element={<NewApplication />} />
 
             {/* Step 6d: Protected single-application detail page. */}
             <Route path="/applications/:id" element={<ApplicationDetail />} />

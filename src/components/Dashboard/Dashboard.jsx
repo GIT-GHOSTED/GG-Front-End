@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import "./Dashboard.css";
 import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
 

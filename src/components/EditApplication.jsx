@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router";
 import { api } from "../services/api";
 
 // Step 1: Normalize incoming date values to the YYYY-MM-DD format required by input[type="date"].
