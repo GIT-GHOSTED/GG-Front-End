@@ -1,0 +1,17 @@
+.dataBox {
+  display: grid;
+  border-radius: 20px;
+  background-color: lightgray;
+  width: 100px;
+  height: 50px;
+  padding: 15px;
+}
+
+.dataBox > p {
+  margin: 0px;
+}
+
+.appDetails {
+  display: flex;
+  gap: 30px;
+}
