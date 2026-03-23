@@ -1,4 +1,5 @@
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
+import gitGhost from "../../img/Dark-Ghost.png";
 
 export default function Navbar({ token, setToken }) {
   // Step 1: Define logout behavior.
@@ -18,7 +19,9 @@ export default function Navbar({ token, setToken }) {
       }}
     >
       {/* Step 2a: Render brand/home link. */}
-      <Link to="/">Git Ghosted</Link>
+      <Link to="/">
+        <img src={gitGhost} />
+      </Link>
 
       {/* Step 2b: Render right-side nav items based on auth state. */}
       <div style={{ display: "flex", gap: "1rem" }}>
@@ -27,6 +30,9 @@ export default function Navbar({ token, setToken }) {
             {/* Step 2c: Authenticated links/actions. */}
             <Link to="/dashboard">Dashboard</Link>
             <Link to="/applications">Applications</Link>
+            <Link to="https://www.linkedin.com/feed/">LinkedIn</Link>
+            <Link to="https://www.ziprecruiter.com/">ZipRecruiter</Link>
+            <Link to="https://www.indeed.com/">Indeed</Link>
             <button onClick={handleLogout}>Logout</button>
           </>
         ) : (
