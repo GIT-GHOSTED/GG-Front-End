@@ -11,7 +11,7 @@ export default function Dashboard() {
     { name: "Rejected", value: 3 },
   ];
 
-  // Dummy recent applications
+  // Dummy data for recent applications
   const recentApps = [
     {
       company: "Netflix",
@@ -39,7 +39,7 @@ export default function Dashboard() {
     },
   ];
 
-  // Dummy follow-ups
+  // Dummy data for follow-ups
   const followUps = [
     { company: "Google", role: "Senior Frontend Engineer", date: "2026-03-25" },
     { company: "Amazon", role: "Product Designer", date: "2026-03-27" },
@@ -64,6 +64,7 @@ export default function Dashboard() {
         <section className="pieChartSection">
           <h3>Status Breakdown</h3>
 
+          {/* Implementing Pie Chart component */}
           <PieChart width={400} height={200}>
             <Pie
               data={statusData}
