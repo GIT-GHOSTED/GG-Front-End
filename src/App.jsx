@@ -8,16 +8,8 @@ export default function App() {
       <Navbar token={token} setToken={setToken} />
       <main>
         <Routes>
-            <Route path="/" element= {<Homepage />} />
-            <Route path="/register" element={<Register setToken={setToken} />} />
-            <Route path="/login" element={<LogIn setToken={setToken} />} />
-            <Route element={<Layout token={token} />}>
-                <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/applications" element= {} />
-                <Route path="/applications/new" element= {} />
-                <Route path="/applications/:id" element= {} />
-                <Route path="/applications/:id/edit" element= {} />
-            </Route>
+          <Route path="/register" element={<Register setToken={setToken} />} />
+          <Route path="/login" element={<LogIn setToken={setToken} />} />
         </Routes>
       </main>
     </>
