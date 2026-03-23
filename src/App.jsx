@@ -1,11 +1,10 @@
-import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Homepage from "./components/Homepage";
 import Register from "./components/Register";
 import LogIn from "./components/LogIn";
 import Layout from "./components/Layout";
-import Dashboard from "./components/Dashboard";
+import Dashboard from "./components/Dashboard/Dashboard";
 import Applications from "./components/Applications";
 import NewApplication from "./components/NewApplication";
 import ApplicationDetail from "./components/ApplicationDetail";
