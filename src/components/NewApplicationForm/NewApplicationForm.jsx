@@ -11,6 +11,7 @@ export default function NewApplicationForm({ showForm, setShowForm }) {
     notes: "",
     contactName: "",
     contactEmail: "",
+    followUpDate: "",
   });
 
   const API = import.meta.env.VITE_API_URL;
@@ -102,15 +103,6 @@ export default function NewApplicationForm({ showForm, setShowForm }) {
           </label>
 
           <label>
-            Notes
-            <input
-              name="notes"
-              value={formData.notes}
-              onChange={handleChange}
-            />
-          </label>
-
-          <label>
             Contact Name
             <input
               name="contactName"
@@ -125,6 +117,25 @@ export default function NewApplicationForm({ showForm, setShowForm }) {
               type="email"
               name="contactEmail"
               value={formData.contactEmail}
+              onChange={handleChange}
+            />
+          </label>
+
+          <label>
+            Follow-up Date
+            <input
+              type="date"
+              name="dateApplied"
+              value={formData.followUpDate}
+              onChange={handleChange}
+            />
+          </label>
+
+          <label>
+            Notes
+            <input
+              name="notes"
+              value={formData.notes}
               onChange={handleChange}
             />
           </label>
