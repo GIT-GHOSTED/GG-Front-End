@@ -1,62 +1,24 @@
 import { Link } from "react-router";
-import { useEffect, useState } from "react";
-import { api } from "../services/api";
+import { useState } from "react";
 import NewApplicationForm from "./NewApplicationForm/NewApplicationForm";
+import { useApplications } from "../context/applicationsContext";
 
 export default function Applications() {
-  // Step 1: Store the fetched applications list.
-  const [applications, setApplications] = useState([]);
+  // Step 1: Use context to get applications
+  const { applications } = useApplications();
 
-  // Step 2: Track whether the page is still loading data.
-  const [loading, setLoading] = useState(true);
-
-  // Step 3: Track any user-facing error message.
-  const [error, setError] = useState("");
+  // Step 2: Track whether the new application form is open
   const [showForm, setShowForm] = useState(false);
 
-  // Step 4: Fetch applications once when this page loads.
-  useEffect(() => {
-    async function loadApplications() {
-      // Step 4a: Get auth token from localStorage.
-      const token = localStorage.getItem("token");
-
-      // Step 4b: If no token, stop early and ask user to log in.
-      if (!token) {
-        setError("Please log in.");
-        setLoading(false);
-        return;
-      }
-
-      try {
-        // Step 4c: Request applications from the backend API.
-        const data = await api.getApplications(token);
-
-        // Step 4d: Save returned applications (or fallback to empty array).
-        setApplications(data.applications || []);
-      } catch (err) {
-        // Step 4e: Show fetch error if request fails.
-        setError(err.message);
-      } finally {
-        // Step 4f: End loading state after request finishes.
-        setLoading(false);
-      }
-    }
-
-    // Step 4g: Run the async loader.
-    loadApplications();
-  }, []);
-
-  // Step 5: Render the applications list UI.
+  // Step 3: Render the applications list UI
   return (
     <section style={{ padding: "1rem" }}>
       <h2>Applications</h2>
-      {/* Step 5b: Show loading indicator while fetching data. */}
-      {loading ? <p>Loading...</p> : null}
 
-      {/* Step 5c: Show error message when one exists. */}
-      {error ? <p style={{ color: "crimson" }}>{error}</p> : null}
+      {/* Step 3a: Show message if no applications exist */}
+      {applications.length === 0 ? <p>No applications yet.</p> : null}
 
-      {/* Step 5d: Render each application as a list item with a detail link. */}
+      {/* Step 3b: Render each application */}
       <ul>
         {applications.map((application) => (
           <li key={application.id}>
@@ -65,8 +27,11 @@ export default function Applications() {
           </li>
         ))}
       </ul>
-      {/* ADDING BUTTON TO CREATE NEW APP */}
+
+      {/* Step 3c: Button to toggle new application form */}
       <button onClick={() => setShowForm(!showForm)}>New Application</button>
+
+      {/* Step 3d: Render the form if showForm is true */}
       {showForm && (
         <NewApplicationForm showForm={showForm} setShowForm={setShowForm} />
       )}

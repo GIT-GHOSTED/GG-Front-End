@@ -1,43 +1,44 @@
 // TODO ADD BETTER COMMENTS
 import "./Dashboard.css";
+import { useApplications } from "../../context/applicationsContext";
 import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
 
 export default function Dashboard() {
-  // Dummy data for chart
+  const { applications } = useApplications();
+
+  const appliedCount = applications.filter(
+    (curApp) => curApp.status === "Applied",
+  ).length;
+
+  const interviewCount = applications.filter(
+    (currApp) => currApp.status === "Interview",
+  ).length;
+
+  const offerCount = applications.filter(
+    (currApp) => currApp.status === "Offered",
+  ).length;
+
+  const rejectedCount = applications.filter(
+    (currApp) => currApp.status === "Rejected",
+  ).length;
+
+  const ghostedCount = applications.filter(
+    (currApp) => currApp.status === "Ghosted",
+  ).length;
+
+  const totalApps = applications.length;
+
+  // Data for chart
   const statusData = [
-    { name: "Applied", value: 5 },
-    { name: "Interviewed", value: 2 },
-    { name: "Offered", value: 1 },
-    { name: "Rejected", value: 3 },
+    { name: "Applied", value: appliedCount },
+    { name: "Interviewed", value: interviewCount },
+    { name: "Offered", value: offerCount },
+    { name: "Rejected", value: rejectedCount },
+    { name: "Ghosted", value: ghostedCount },
   ];
 
-  // Dummy data for recent applications
-  const recentApps = [
-    {
-      company: "Netflix",
-      role: "Frontend Dev",
-      date: "2026-03-21",
-      status: "Interviewed",
-    },
-    {
-      company: "Apple",
-      role: "UI Engineer",
-      date: "2026-03-20",
-      status: "Applied",
-    },
-    {
-      company: "Tesla",
-      role: "Software Eng",
-      date: "2026-03-19",
-      status: "Rejected",
-    },
-    {
-      company: "Spotify",
-      role: "Web Dev",
-      date: "2026-03-18",
-      status: "Rejected",
-    },
-  ];
+  // Data for recent applications
+  const recentApps = applications.slice(0, 4);
 
   // Dummy data for follow-ups
   const followUps = [
@@ -46,17 +47,18 @@ export default function Dashboard() {
     { company: "Meta", role: "Fullstack Developer", date: "2026-03-30" },
   ];
 
-  const COLORS = ["#8884d8", "#ffc658", "#82ca9d", "#ff6b6b"];
+  const COLORS = ["#8884d8", "#ffc658", "#82ca9d", "#ff6b6b", "#2b2a2a"];
 
   return (
     <section style={{ padding: "1rem" }}>
       <h2>Dashboard</h2>
 
       <section className="appDetails">
-        <DataBox number={7} tag={"Active"} />
-        <DataBox number={2} tag={"Interviews"} />
-        <DataBox number={1} tag={"Offers"} />
-        <DataBox number={3} tag={"Follow Ups"} />
+        <DataBox number={totalApps} tag={"Total Applications"} />
+        <DataBox number={interviewCount} tag={"Interviews"} />
+        <DataBox number={rejectedCount} tag={"Rejected"} />
+        <DataBox number={offerCount} tag={"Offers"} />
+        <DataBox number={ghostedCount} tag={"Ghosted"} />
       </section>
 
       <section className="topRow">

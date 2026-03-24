@@ -1,7 +1,7 @@
 /* TODO ADD BETTER COMMENTS */
 .appDetails {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 20px;
   margin-bottom: 20px;
 }
@@ -15,7 +15,6 @@
 
   flex-direction: column;
   justify-content: center;
-  align-items: center;
 }
 
 .topRow {
