@@ -25,9 +25,11 @@ export default function FollowUps({ applications }) {
     <section className="followUpOverflow">
       <ul>
         {sortedFollowUps.map((app) => (
-          <li key={app.id}>
-            <p>{app.company}</p>
-            <p>{app.role}</p>
+          <li key={app.id} className="followUpList">
+            <section>
+              <p>{app.company}</p>
+              <p>{app.role}</p>
+            </section>
             <p>{new Date(app.followup_date).toLocaleDateString()}</p>
           </li>
         ))}

@@ -1,4 +1,21 @@
 .followUpOverflow {
   /* Allow internal scrolling for content */
   overflow-y: auto;
+  height: 300px;
+}
+
+.followUpList {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.followUpList:last-child {
+  border-bottom: none;
+}
+
+.followUpList > section {
+  display: grid;
+  gap: 2px;
 }
