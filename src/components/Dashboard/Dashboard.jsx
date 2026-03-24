@@ -2,6 +2,7 @@
 import "./Dashboard.css";
 import { useApplications } from "../../context/applicationsContext";
 import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
+import FollowUps from "../FollowUps/FollowUps";
 
 export default function Dashboard() {
   const { applications } = useApplications();
@@ -40,12 +41,11 @@ export default function Dashboard() {
   // Data for recent applications
   const recentApps = applications.slice(0, 4);
 
-  // Dummy data for follow-ups
-  const followUps = [
-    { company: "Google", role: "Senior Frontend Engineer", date: "2026-03-25" },
-    { company: "Amazon", role: "Product Designer", date: "2026-03-27" },
-    { company: "Meta", role: "Fullstack Developer", date: "2026-03-30" },
-  ];
+  const today = new Date();
+  const threeDaysLater = new Date();
+  threeDaysLater.setDate(today.getDate() + 3);
+
+  const followUps = applications.filter((app) => app.followup_date); // only apps that have a follow-up
 
   const COLORS = ["#8884d8", "#ffc658", "#82ca9d", "#ff6b6b", "#2b2a2a"];
 
@@ -86,11 +86,9 @@ export default function Dashboard() {
         </section>
 
         {/* Follow-ups Section*/}
-        <section className="followUpsSection">
-          <h3>Upcoming Follow-ups</h3>
-          <ul>
-            <FollowUps followUps={followUps} />
-          </ul>
+        <section className="followUpSection">
+          <h3>Upcoming Follow-Ups</h3>
+          <FollowUps applications={applications} />
         </section>
       </section>
 
@@ -127,20 +125,6 @@ function RecentActivity({ recentApps }) {
       <section>
         <p>{currApp.date}</p>
         <p>{currApp.status}</p>
-      </section>
-    </li>
-  ));
-}
-
-function FollowUps({ followUps }) {
-  return followUps.map((currItem, index) => (
-    <li className="recentAppList" key={index}>
-      <section>
-        <p>{currItem.company}</p>
-        <p>{currItem.role}</p>
-      </section>
-      <section>
-        <p>{currItem.date}</p>
       </section>
     </li>
   ));

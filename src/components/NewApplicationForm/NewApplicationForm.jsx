@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./NewApplicationForm.css";
+import { useApplications } from "../../context/applicationsContext";
 
 export default function NewApplicationForm({ showForm, setShowForm }) {
   const [formData, setFormData] = useState({
@@ -11,10 +12,12 @@ export default function NewApplicationForm({ showForm, setShowForm }) {
     notes: "",
     contactName: "",
     contactEmail: "",
+    followUpDate: "",
   });
 
   const API = import.meta.env.VITE_API_URL;
   const token = localStorage.getItem("token");
+  const { loadApplications } = useApplications();
 
   const handleChange = (event) => {
     setFormData({
@@ -24,7 +27,7 @@ export default function NewApplicationForm({ showForm, setShowForm }) {
   };
 
   const createNewApp = async (event) => {
-    // event.preventDefault();
+    event.preventDefault();
 
     try {
       const res = await fetch(`${API}/applications`, {
@@ -38,8 +41,9 @@ export default function NewApplicationForm({ showForm, setShowForm }) {
 
       if (!res.ok) throw new Error("Failed request");
 
-      const data = await res.json();
-      console.log(data);
+      await loadApplications();
+      setShowForm(!showForm);
+      await res.json();
     } catch (e) {
       console.error(e);
     }
@@ -102,15 +106,6 @@ export default function NewApplicationForm({ showForm, setShowForm }) {
           </label>
 
           <label>
-            Notes
-            <input
-              name="notes"
-              value={formData.notes}
-              onChange={handleChange}
-            />
-          </label>
-
-          <label>
             Contact Name
             <input
               name="contactName"
@@ -125,6 +120,25 @@ export default function NewApplicationForm({ showForm, setShowForm }) {
               type="email"
               name="contactEmail"
               value={formData.contactEmail}
+              onChange={handleChange}
+            />
+          </label>
+
+          <label>
+            Follow-up Date
+            <input
+              type="date"
+              name="followUpDate"
+              value={formData.followUpDate}
+              onChange={handleChange}
+            />
+          </label>
+
+          <label>
+            Notes
+            <input
+              name="notes"
+              value={formData.notes}
               onChange={handleChange}
             />
           </label>
