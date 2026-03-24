@@ -1,7 +1,3 @@
-// src/components/Layout.jsx
-// Simple layout with a fixed sidebar and centered logo.
-// Adjusted so page content sits closer to the top for beginner clarity.
-
 import { useState, useEffect } from "react";
 import {
   Navigate,
