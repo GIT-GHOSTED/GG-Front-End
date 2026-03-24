@@ -18,7 +18,8 @@
 }
 
 .topRow {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 20px;
   margin-top: 20px;
 }
@@ -59,10 +60,10 @@ section > p {
   margin: 0;
 }
 
-.followUpsSection {
+.followUpSection {
   background-color: #f9fafb;
   padding: 15px;
   border-radius: 12px;
   margin-top: 20px;
-  flex: 1;
+  height: 300px;
 }

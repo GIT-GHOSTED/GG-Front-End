@@ -1,0 +1,4 @@
+.followUpOverflow {
+  /* Allow internal scrolling for content */
+  overflow-y: auto;
+}

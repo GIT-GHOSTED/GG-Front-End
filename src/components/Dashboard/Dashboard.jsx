@@ -2,6 +2,7 @@
 import "./Dashboard.css";
 import { useApplications } from "../../context/applicationsContext";
 import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
+import FollowUps from "../FollowUps/FollowUps";
 
 export default function Dashboard() {
   const { applications } = useApplications();
@@ -85,11 +86,9 @@ export default function Dashboard() {
         </section>
 
         {/* Follow-ups Section*/}
-        <section className="followUpsSection">
-          <h3>Upcoming Follow-ups</h3>
-          <ul>
-            <FollowUps followUps={followUps} />
-          </ul>
+        <section className="followUpSection">
+          <h3>Upcoming Follow-Ups</h3>
+          <FollowUps applications={applications} />
         </section>
       </section>
 
@@ -126,20 +125,6 @@ function RecentActivity({ recentApps }) {
       <section>
         <p>{currApp.date}</p>
         <p>{currApp.status}</p>
-      </section>
-    </li>
-  ));
-}
-
-function FollowUps({ followUps }) {
-  return followUps.map((currItem, index) => (
-    <li className="recentAppList" key={index}>
-      <section>
-        <p>{currItem.company}</p>
-        <p>{currItem.role}</p>
-      </section>
-      <section>
-        <p>{currItem.followup_date}</p>
       </section>
     </li>
   ));
