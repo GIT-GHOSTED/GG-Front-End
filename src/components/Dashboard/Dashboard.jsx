@@ -40,17 +40,16 @@ export default function Dashboard() {
   // Data for recent applications
   const recentApps = applications.slice(0, 4);
 
-  // Dummy data for follow-ups
-  const followUps = [
-    { company: "Google", role: "Senior Frontend Engineer", date: "2026-03-25" },
-    { company: "Amazon", role: "Product Designer", date: "2026-03-27" },
-    { company: "Meta", role: "Fullstack Developer", date: "2026-03-30" },
-  ];
+  const today = new Date();
+  const threeDaysLater = new Date();
+  threeDaysLater.setDate(today.getDate() + 3);
+
+  const followUps = applications.filter((app) => app.followup_date); // only apps that have a follow-up
 
   const COLORS = ["#8884d8", "#ffc658", "#82ca9d", "#ff6b6b", "#2b2a2a"];
 
   return (
-    <section style={{ padding: "1rem" }}>
+    <section>
       <h2>Dashboard</h2>
 
       <section className="appDetails">
