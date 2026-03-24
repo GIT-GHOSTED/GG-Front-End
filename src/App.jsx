@@ -16,10 +16,7 @@ export default function App() {
   // Step 2: Render app shell (shared navbar + routed page content).
   return (
     <>
-      {/* Step 2a: Always render navbar and pass auth state/actions to it. */}
-      {/* <Navbar token={token} setToken={setToken} /> */}
-
-      {/* Step 2b: Render route-driven page content. */}
+      {/* Step 2: Render route-driven page content. */}
       <main>
         <Routes>
           {/* Step 3: Public route for landing page. */}
