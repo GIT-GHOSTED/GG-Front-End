@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.jsx";
 import { BrowserRouter } from "react-router";
+import { ApplicationsProvider } from "./context/applicationsContext.jsx";
 
 // Step 1: Find the root DOM element and create a React root instance.
 createRoot(document.getElementById("root")).render(
@@ -11,7 +12,9 @@ createRoot(document.getElementById("root")).render(
     {/* Step 3: Wrap app in StrictMode for extra development checks. */}
     <StrictMode>
       {/* Step 4: Render the top-level App component. */}
-      <App />
+      <ApplicationsProvider>
+        <App />
+      </ApplicationsProvider>
     </StrictMode>
   </BrowserRouter>,
 );
