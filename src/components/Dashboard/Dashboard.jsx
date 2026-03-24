@@ -1,14 +1,35 @@
 // TODO ADD BETTER COMMENTS
 import "./Dashboard.css";
+import { useApplications } from "../../context/applicationsContext";
 import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
 
 export default function Dashboard() {
+  const { applications } = useApplications();
+
+  const appliedCount = applications.filter(
+    (curApp) => curApp.status === "Applied",
+  ).length;
+
+  const interviewCount = applications.filter(
+    (currApp) => currApp.status === "Interview",
+  ).length;
+
+  const offerCount = applications.filter(
+    (currApp) => currApp.status === "Offered",
+  ).length;
+
+  const rejectedCount = applications.filter(
+    (currApp) => currApp.status === "Rejected",
+  ).length;
+
+  const totalApps = applications.length;
+
   // Dummy data for chart
   const statusData = [
-    { name: "Applied", value: 5 },
-    { name: "Interviewed", value: 2 },
-    { name: "Offered", value: 1 },
-    { name: "Rejected", value: 3 },
+    { name: "Applied", value: appliedCount },
+    { name: "Interviewed", value: interviewCount },
+    { name: "Offered", value: offerCount },
+    { name: "Rejected", value: rejectedCount },
   ];
 
   // Dummy data for recent applications
@@ -53,10 +74,10 @@ export default function Dashboard() {
       <h2>Dashboard</h2>
 
       <section className="appDetails">
-        <DataBox number={7} tag={"Active"} />
-        <DataBox number={2} tag={"Interviews"} />
-        <DataBox number={1} tag={"Offers"} />
-        <DataBox number={3} tag={"Follow Ups"} />
+        <DataBox number={totalApps} tag={"Total Applications"} />
+        <DataBox number={interviewCount} tag={"Interviews"} />
+        <DataBox number={rejectedCount} tag={"Rejected"} />
+        <DataBox number={offerCount} tag={"Offers"} />
       </section>
 
       <section className="topRow">
