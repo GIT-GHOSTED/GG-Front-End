@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
+import { Button, Input, Select } from "antd";
 import { api } from "../services/api";
 
 // Step 1: Normalize incoming date values to the YYYY-MM-DD format required by input[type="date"].
@@ -117,7 +118,7 @@ export default function EditApplication() {
       );
 
       // Step 10f: Navigate back to the application detail page after success.
-      navigate(`/applications/${id}`);
+      navigate(`/applications/${id}`, { state: { updated: true } });
     } catch (err) {
       // Step 10g: Show update error message.
       setError(err.message);
@@ -129,7 +130,7 @@ export default function EditApplication() {
 
   // Step 11: Render the edit form UI.
   return (
-    <section style={{ padding: "1rem" }}>
+    <section style={{ padding: "1rem", maxWidth: "500px", margin: "0 auto" }}>
       <h2>Edit Application #{id}</h2>
 
       {/* Step 11a: Show loading message while initial data is being fetched. */}
@@ -141,7 +142,8 @@ export default function EditApplication() {
       {/* Step 11c: Controlled form bound to formData state and submit handler. */}
       <form onSubmit={handleSubmit}>
         {/* Step 11d: Edit company value. */}
-        <input
+        <Input
+          placeholder="Basic usage"
           type="text"
           value={formData.company}
           onChange={setField("company")}
@@ -149,7 +151,8 @@ export default function EditApplication() {
         />
 
         {/* Step 11e: Edit role value. */}
-        <input
+        <Input
+          placeholder="Basic usage"
           type="text"
           value={formData.role}
           onChange={setField("role")}
@@ -162,28 +165,35 @@ export default function EditApplication() {
           <option>Applied</option>
           <option>Phone Screen</option>
           <option>Interview</option>
-          <option>Offer</option>
+          <option>Offered</option>
           <option>Rejected</option>
         </select>
 
         {/* Step 11g: Edit date applied value using date input format. */}
-        <input
+        <Input
           type="date"
           value={formData.date_applied}
           onChange={setField("date_applied")}
         />
 
         {/* Step 11h: Edit notes value. */}
-        <textarea
+        <Input
+          rows={4}
+          maxLength={6}
           placeholder="Notes"
           value={formData.notes}
           onChange={setField("notes")}
         />
 
         {/* Step 11i: Submit updates; disable button while request is saving. */}
-        <button type="submit" disabled={saving}>
+        <Button
+          color="purple"
+          variant="solid"
+          htmlType="submit"
+          disabled={saving}
+        >
           {saving ? "Updating..." : "Update"}
-        </button>
+        </Button>
       </form>
     </section>
   );

@@ -16,7 +16,7 @@
 }
 
 .formContent {
-  background: white;
+  background: rgb(84, 12, 148);
   padding: 25px;
   border-radius: 12px;
   width: 400px;
@@ -36,7 +36,7 @@
 .formGrid label {
   display: grid;
   font-size: 0.9rem;
-  color: #374151;
+  color: white;
 }
 
 /* Inputs */
@@ -65,8 +65,8 @@
 
 /* Selecting the "Submit Button" and adding style to it */
 .formActions button[type="submit"] {
-  background-color: #6366f1;
-  color: white;
+  background-color: white;
+  color: black;
 }
 
 /* Selecting the Cancel Button" and adding style to it */

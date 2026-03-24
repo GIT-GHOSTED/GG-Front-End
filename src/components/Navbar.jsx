@@ -1,4 +1,5 @@
 import { Link } from "react-router";
+import { Button } from "antd";
 import gitGhost from "../../img/Dark-Ghost.png";
 
 export default function Navbar({ token, setToken }) {
@@ -13,11 +14,7 @@ export default function Navbar({ token, setToken }) {
 
   // Step 2: Render navigation bar layout.
   return (
-    <nav
-      style={{
-        padding: "1rem",
-      }}
-    >
+    <nav>
       {/* Step 2a: Render brand/home link. */}
       <Link to="/">
         <img src={gitGhost} />
@@ -28,12 +25,28 @@ export default function Navbar({ token, setToken }) {
         {token ? (
           <>
             {/* Step 2c: Authenticated links/actions. */}
-            <Link to="/dashboard">Dashboard</Link>
-            <Link to="/applications">Applications</Link>
-            <Link to="https://www.linkedin.com/feed/">LinkedIn</Link>
-            <Link to="https://www.ziprecruiter.com/">ZipRecruiter</Link>
-            <Link to="https://www.indeed.com/">Indeed</Link>
-            <button onClick={handleLogout}>Logout</button>
+            <Button color="purple" variant="solid">
+              <Link to="/dashboard">Dashboard</Link>
+            </Button>
+            <Button color="purple" variant="solid">
+              <Link to="/applications">Applications</Link>
+            </Button>
+
+            {/* Step 2d: User hyperlinks. */}
+            <Button color="purple" variant="solid">
+              <Link to="https://www.linkedin.com/feed/">LinkedIn</Link>
+            </Button>
+            <Button color="purple" variant="solid">
+              <Link to="https://www.ziprecruiter.com/">ZipRecruiter</Link>
+            </Button>
+            <Button color="purple" variant="solid">
+              <Link to="https://www.indeed.com/">Indeed</Link>
+            </Button>
+
+            {/* Step 2e: Logout button. */}
+            <Button color="purple" variant="solid" onClick={handleLogout}>
+              Logout
+            </Button>
           </>
         ) : (
           <>

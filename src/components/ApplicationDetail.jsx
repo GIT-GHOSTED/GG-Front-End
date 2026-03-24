@@ -1,5 +1,6 @@
-import { Link, useParams } from "react-router";
+import { Link, useParams, useLocation } from "react-router";
 import { useEffect, useState } from "react";
+import { Button } from "antd";
 import { api } from "../services/api";
 
 // Step 1: Convert raw database/API date values into a readable UI format.
@@ -29,39 +30,23 @@ export default function ApplicationDetail() {
   const [application, setApplication] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const location = useLocation();
 
   // Step 4: Load the application when the component mounts or ID changes.
   useEffect(() => {
-    async function loadApplication() {
-      // Step 4a: Get auth token from localStorage.
+    async function load() {
       const token = localStorage.getItem("token");
-
-      // Step 4b: Stop and show message if user is not authenticated.
-      if (!token) {
-        setError("Please log in.");
-        setLoading(false);
-        return;
-      }
-
-      try {
-        // Step 4c: Request the application record from the API.
-        const data = await api.getApplicationById(id, token);
-
-        // Step 4d: Save returned application in state.
-        setApplication(data.application);
-      } catch (err) {
-        // Step 4e: Show request error message.
-        setError(err.message);
-      } finally {
-        // Step 4f: End loading state regardless of success/failure.
-        setLoading(false);
-      }
+      const data = await api.getApplicationById(id, token);
+      setApplication(data.application);
     }
 
-    // Step 4g: Execute the async loader.
-    loadApplication();
-  }, [id]);
+    load();
 
+    // ⭐ If we came back from EditApplication, refetch again
+    if (location.state?.updated) {
+      load();
+    }
+  }, [id, location.state]);
   // Step 5: Delete handler for the current application.
   const handleDelete = async () => {
     // Step 5a: Get auth token from localStorage.
@@ -109,9 +94,15 @@ export default function ApplicationDetail() {
 
       {/* Step 6d: Provide edit, back, and delete actions. */}
       <div style={{ display: "flex", gap: "0.75rem" }}>
-        <Link to={`/applications/${id}/edit`}>Edit</Link>
-        <Link to="/applications">Back</Link>
-        <button onClick={handleDelete}>Delete</button>
+        <Button color="purple" variant="solid">
+          <Link to={`/applications/${id}/edit`}>Edit</Link>
+        </Button>
+        <Button color="purple" variant="solid">
+          <Link to="/applications">Back</Link>
+        </Button>
+        <Button color="purple" variant="solid" onClick={handleDelete}>
+          Delete
+        </Button>
       </div>
     </section>
   );

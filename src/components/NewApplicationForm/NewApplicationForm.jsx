@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Button } from "antd";
 import "./NewApplicationForm.css";
 
 export default function NewApplicationForm({ showForm, setShowForm }) {
@@ -24,7 +25,7 @@ export default function NewApplicationForm({ showForm, setShowForm }) {
   };
 
   const createNewApp = async (event) => {
-    // event.preventDefault();
+    event.preventDefault(); // stop page reload
 
     try {
       const res = await fetch(`${API}/applications`, {
@@ -39,7 +40,12 @@ export default function NewApplicationForm({ showForm, setShowForm }) {
       if (!res.ok) throw new Error("Failed request");
 
       const data = await res.json();
-      console.log(data);
+
+      // ❗ Replace this with what you actually want to do:
+      // e.g. close the form, refresh list, etc.
+      console.log("Created new application:", data);
+
+      setShowForm(false); // example action
     } catch (e) {
       console.error(e);
     }
@@ -75,7 +81,7 @@ export default function NewApplicationForm({ showForm, setShowForm }) {
               <option value={""}>Select Status</option>
               <option value={"Applied"}>Applied</option>
               <option value={"Interview"}>Interview</option>
-              <option value={"Offered"}>Offered</option>
+              <option value={"Offered"}>Offer</option>
               <option value={"Rejected"}>Rejected</option>
               <option value={"Ghosted"}>Ghosted</option>
             </select>
@@ -131,10 +137,10 @@ export default function NewApplicationForm({ showForm, setShowForm }) {
         </section>
 
         <section className="formActions">
-          <button type="submit">Save</button>
-          <button type="button" onClick={() => setShowForm(!showForm)}>
+          <Button htmlType="submit">Save</Button>
+          <Button type="button" onClick={() => setShowForm(!showForm)}>
             Cancel
-          </button>
+          </Button>
         </section>
       </form>
     </section>
