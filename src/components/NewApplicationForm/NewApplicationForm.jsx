@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./NewApplicationForm.css";
+import { useApplications } from "../../context/applicationsContext";
 
 export default function NewApplicationForm({ showForm, setShowForm }) {
   const [formData, setFormData] = useState({
@@ -16,6 +17,7 @@ export default function NewApplicationForm({ showForm, setShowForm }) {
 
   const API = import.meta.env.VITE_API_URL;
   const token = localStorage.getItem("token");
+  const { loadApplications } = useApplications();
 
   const handleChange = (event) => {
     setFormData({
@@ -25,7 +27,7 @@ export default function NewApplicationForm({ showForm, setShowForm }) {
   };
 
   const createNewApp = async (event) => {
-    // event.preventDefault();
+    event.preventDefault();
 
     try {
       const res = await fetch(`${API}/applications`, {
@@ -39,8 +41,10 @@ export default function NewApplicationForm({ showForm, setShowForm }) {
 
       if (!res.ok) throw new Error("Failed request");
 
-      const data = await res.json();
-      console.log(data);
+      await loadApplications();
+      setShowForm(!showForm);
+      // const data = await res.json();
+      // console.log(data);
     } catch (e) {
       console.error(e);
     }

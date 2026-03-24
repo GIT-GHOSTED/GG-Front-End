@@ -8,30 +8,30 @@ export function ApplicationsProvider({ children }) {
   const [error, setError] = useState("");
   const token = localStorage.getItem("token");
 
-  useEffect(() => {
-    async function loadApplications() {
-      // Step 4b: If no token, stop early and ask user to log in.
-      if (!token) {
-        setError("Please log in.");
-        setLoading(false);
-        return;
-      }
-
-      try {
-        // Step 4c: Request applications from the backend API.
-        const data = await api.getApplications(token);
-
-        // Step 4d: Save returned applications (or fallback to empty array).
-        setApplications(data.applications || []);
-      } catch (err) {
-        // Step 4e: Show fetch error if request fails.
-        setError(err.message);
-      } finally {
-        // Step 4f: End loading state after request finishes.
-        setLoading(false);
-      }
+  const loadApplications = async () => {
+    // Step 4b: If no token, stop early and ask user to log in.
+    if (!token) {
+      setError("Please log in.");
+      setLoading(false);
+      return;
     }
 
+    try {
+      // Step 4c: Request applications from the backend API.
+      const data = await api.getApplications(token);
+
+      // Step 4d: Save returned applications (or fallback to empty array).
+      setApplications(data.applications || []);
+    } catch (err) {
+      // Step 4e: Show fetch error if request fails.
+      setError(err.message);
+    } finally {
+      // Step 4f: End loading state after request finishes.
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
     // Step 4g: Run the async loader.
     loadApplications();
   }, [token]);
@@ -39,6 +39,7 @@ export function ApplicationsProvider({ children }) {
   const value = {
     applications: applications,
     setApplications: setApplications,
+    loadApplications: loadApplications,
     error: error,
     loading: loading,
   };
