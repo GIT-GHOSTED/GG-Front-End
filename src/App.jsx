@@ -1,5 +1,4 @@
 import { Routes, Route } from "react-router";
-import Navbar from "./components/Navbar";
 import Homepage from "./components/Homepage";
 import Register from "./components/Register";
 import LogIn from "./components/LogIn";
@@ -18,7 +17,7 @@ export default function App() {
   return (
     <>
       {/* Step 2a: Always render navbar and pass auth state/actions to it. */}
-      <Navbar token={token} setToken={setToken} />
+      {/* <Navbar token={token} setToken={setToken} /> */}
 
       {/* Step 2b: Render route-driven page content. */}
       <main>

@@ -2,6 +2,7 @@ import { Link } from "react-router";
 import { useState } from "react";
 import NewApplicationForm from "./NewApplicationForm/NewApplicationForm";
 import { useApplications } from "../context/applicationsContext";
+import { Button } from "antd";
 
 export default function Applications() {
   // Step 1: Use context to get applications
@@ -29,7 +30,9 @@ export default function Applications() {
       </ul>
 
       {/* Step 3c: Button to toggle new application form */}
-      <button onClick={() => setShowForm(!showForm)}>New Application</button>
+      <Button type="primary" onClick={() => setShowForm(!showForm)}>
+        New Application
+      </Button>
 
       {/* Step 3d: Render the form if showForm is true */}
       {showForm && (
