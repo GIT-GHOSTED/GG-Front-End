@@ -125,7 +125,7 @@ export default function NewApplicationForm({ showForm, setShowForm }) {
             Follow-up Date
             <input
               type="date"
-              name="dateApplied"
+              name="followUpDate"
               value={formData.followUpDate}
               onChange={handleChange}
             />
