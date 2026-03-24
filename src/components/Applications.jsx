@@ -1,6 +1,7 @@
 import { Link } from "react-router";
 import { useEffect, useState } from "react";
 import { api } from "../services/api";
+import NewApplicationForm from "./NewApplicationForm/NewApplicationForm";
 
 export default function Applications() {
   // Step 1: Store the fetched applications list.
@@ -11,6 +12,7 @@ export default function Applications() {
 
   // Step 3: Track any user-facing error message.
   const [error, setError] = useState("");
+  const [showForm, setShowForm] = useState(false);
 
   // Step 4: Fetch applications once when this page loads.
   useEffect(() => {
@@ -48,10 +50,6 @@ export default function Applications() {
   return (
     <section style={{ padding: "1rem" }}>
       <h2>Applications</h2>
-
-      {/* Step 5a: Link to the create-new-application form. */}
-      <Link to="/applications/new">Create new application</Link>
-
       {/* Step 5b: Show loading indicator while fetching data. */}
       {loading ? <p>Loading...</p> : null}
 
@@ -67,6 +65,11 @@ export default function Applications() {
           </li>
         ))}
       </ul>
+      {/* ADDING BUTTON TO CREATE NEW APP */}
+      <button onClick={() => setShowForm(!showForm)}>New Application</button>
+      {showForm && (
+        <NewApplicationForm showForm={showForm} setShowForm={setShowForm} />
+      )}
     </section>
   );
 }

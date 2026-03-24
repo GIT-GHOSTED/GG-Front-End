@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+// TODO ADD BETTER COMMENTS
 import "./Dashboard.css";
 import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
 
