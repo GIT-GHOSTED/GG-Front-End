@@ -43,8 +43,7 @@ export default function NewApplicationForm({ showForm, setShowForm }) {
 
       await loadApplications();
       setShowForm(!showForm);
-      // const data = await res.json();
-      // console.log(data);
+      await res.json();
     } catch (e) {
       console.error(e);
     }
