@@ -77,6 +77,7 @@ export default function NewApplicationForm({ showForm, setShowForm }) {
               <option value={"Interview"}>Interview</option>
               <option value={"Offered"}>Offered</option>
               <option value={"Rejected"}>Rejected</option>
+              <option value={"Ghosted"}>Ghosted</option>
             </select>
           </label>
 
