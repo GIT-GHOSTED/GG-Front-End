@@ -1,9 +1,14 @@
 import { Space, Switch } from "antd";
 
-export default function FollowUpToggle() {
+export default function FollowUpToggle({ toggle, setToggle }) {
   return (
     <Space vertical>
-      <Switch checkedChildren="Upcoming" unCheckedChildren="Overdue" />
+      <Switch
+        checked={toggle}
+        onChange={setToggle}
+        checkedChildren="Overdue"
+        unCheckedChildren="Upcoming"
+      />
     </Space>
   );
 }

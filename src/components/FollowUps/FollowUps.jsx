@@ -20,14 +20,16 @@ export default function FollowUps({ applications, toggle }) {
     return followUpDate < today;
   });
 
-  const toggleFollowups =
-    toggle === "upcoming" ? upcomingFollowUps : overdueFollows;
+  const toggleFollowups = toggle ? overdueFollows : upcomingFollowUps;
 
   const sortedFollowUps = [...toggleFollowups].sort(
     (a, b) => new Date(a.followup_date) - new Date(b.followup_date),
   );
 
-  if (sortedFollowUps.length === 0) return <p>No upcoming follow-ups</p>;
+  if (sortedFollowUps.length === 0)
+    return (
+      <p> {!toggle ? "No upcoming follow-ups" : "No overdue follow-ups"}</p>
+    );
 
   return (
     <section className="followUpOverflow">
