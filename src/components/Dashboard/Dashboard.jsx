@@ -50,7 +50,7 @@ export default function Dashboard() {
   const COLORS = ["#8884d8", "#ffc658", "#82ca9d", "#ff6b6b", "#2b2a2a"];
 
   return (
-    <section style={{ padding: "1rem" }}>
+    <section>
       <h2>Dashboard</h2>
 
       <section className="appDetails">

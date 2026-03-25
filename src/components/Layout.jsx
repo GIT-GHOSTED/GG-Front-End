@@ -1,10 +1,3 @@
-// Layout component: provides a protected, fixed sidebar UI using Ant Design.
-// - Shows a centered, fixed logo inside the sidebar area.
-// - Renders a Menu of links beneath the logo.
-// - Locks page body scrolling and lets main content scroll internally.
-// - Redirects to /login if no auth token is provided.
-// This file includes comments aimed at a junior bootcamp developer explaining each part.
-
 import { useState, useEffect } from "react";
 import {
   Navigate,
@@ -14,7 +7,6 @@ import {
   useNavigate,
 } from "react-router-dom";
 import { Layout as AntLayout, Menu } from "antd";
-// Ant Design icon imports. You can swap icons for others from @ant-design/icons
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
@@ -24,36 +16,22 @@ import {
   GlobalOutlined,
   LogoutOutlined,
 } from "@ant-design/icons";
-// Import your logo image. Adjust the path if your file lives somewhere else.
-import gitGhost from "../../img/Dark-Ghost.png";
-// Ant styles (quick start). In production you may import theme CSS differently.
+import gitGhost from "../../img/Light-Ghost.png"; // adjust path if needed
 import "antd/dist/antd.css";
 
-/* =============
-   Constants
-   =============
-   These values control visual layout. Tweak them for spacing/size.
-*/
 const { Sider, Content } = AntLayout;
-const LOGO_TOP = 12; // distance from top of viewport to top of logo (px)
-const LOGO_SIZE = 85; // fixed height of logo (px)
-const SIDER_WIDTH = 260; // width of expanded sidebar (px)
-const SIDER_COLLAPSED_WIDTH = 80; // width when sidebar is collapsed (px)
 
-/* Layout component
-   - token: the current authentication token (string or null)
-   - setToken: function to update token (used for logout)
-*/
+// Tweak these to change spacing and sizes
+const LOGO_TOP = 6; // smaller top offset so logo is nearer the top
+const LOGO_SIZE = 64; // slightly smaller fixed logo height
+const SIDER_WIDTH = 260; // expanded sidebar width
+const SIDER_COLLAPSED_WIDTH = 80; // collapsed sidebar width
+
 export default function Layout({ token, setToken }) {
-  // useLocation gives us the current URL path so we can mark the active menu item.
-  const location = useLocation();
-  // useNavigate lets us programmatically navigate (used after logout).
-  const navigate = useNavigate();
+  const location = useLocation(); // current URL path
+  const navigate = useNavigate(); // navigate programmatically
 
-  /* Prevent page-level scrolling while this layout is mounted.
-     We set document.body.style.overflow = "hidden" on mount
-     and restore the previous value on unmount.
-  */
+  // Disable body scrolling while this layout is mounted.
   useEffect(() => {
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
@@ -62,40 +40,23 @@ export default function Layout({ token, setToken }) {
     };
   }, []);
 
-  /* -----------------------
-     Authentication guard
-     -----------------------
-     If the caller didn't pass a token, we immediately redirect to /login.
-     Navigate from react-router returns a React element that performs the redirect.
-  */
+  // If not authenticated, go to login.
   if (!token) return <Navigate to="/login" replace />;
 
-  /* If current path is exactly the home page ("/"), we return <Outlet />
-     so nested routes (children) render without the sidebar. This keeps
-     the home page public / separate from protected pages.
-  */
+  // If we're on the public home page, render children without sidebar.
   if (location.pathname === "/") return <Outlet />;
 
-  // State to track whether the sider is collapsed (narrow) or expanded (wide).
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(false); // sidebar collapsed state
+  const selectedKey = location.pathname.split("/")[1] || "dashboard"; // active menu key
 
-  // Determine which menu item should be highlighted based on the current path.
-  // We take the first segment after "/" (e.g., "/dashboard/..." -> "dashboard").
-  const selectedKey = location.pathname.split("/")[1] || "dashboard";
-
-  // Logout behavior: clear token state, remove persisted token, and navigate to login.
   const handleLogout = () => {
-    setToken?.(null); // clear app state token (if setToken provided)
-    localStorage.removeItem("token"); // remove persisted token
-    navigate("/login", { replace: true }); // redirect to login and replace history
+    // clear token and go to login
+    setToken?.(null);
+    localStorage.removeItem("token");
+    navigate("/login", { replace: true });
   };
 
-  /* -----------------------
-     Menu/link definitions
-     -----------------------
-     Each entry describes one menu item: key, path, label, icon, and whether it's external.
-     - external: true means open with <a href> in a new tab instead of react-router Link.
-  */
+  // Menu links (internal use Link, external use anchor)
   const links = [
     {
       key: "dashboard",
@@ -132,32 +93,26 @@ export default function Layout({ token, setToken }) {
     },
   ];
 
-  /* menuPaddingTop ensures the Menu items start below the centered logo.
-     We use LOGO_TOP + LOGO_SIZE + extra spacing (12px) so there is breathing room.
-  */
-  const menuPaddingTop = LOGO_TOP + LOGO_SIZE + 12;
+  // Compute how far down the menu should start so it doesn't overlap the logo.
+  // We reduced the extra spacing so menu items are closer to the top.
+  const menuPaddingTop = LOGO_TOP + LOGO_SIZE + 6;
 
-  /* AntD v5 prefers a data-driven `items` prop rather than JSX children for Menu.
-     We build menuItems from the links array, and append a Logout item at the end.
-  */
+  // Build Menu items for AntD (v5 uses items prop).
   const menuItems = [
     ...links.map((l) => ({
       key: l.key,
-      icon: l.icon || null, // Ant icon component or null
+      icon: l.icon || null,
       label: l.external ? (
-        // external link: uses an <a> tag that opens in a new tab safely
         <a href={l.path} target="_blank" rel="noopener noreferrer">
           {l.label}
         </a>
       ) : (
-        // internal link: use react-router Link for client-side navigation
         <Link to={l.path}>{l.label}</Link>
       ),
     })),
     {
       key: "logout",
       icon: <LogoutOutlined />,
-      // The label can be any React node; here it's a span that calls handleLogout when clicked.
       label: (
         <span onClick={handleLogout} style={{ cursor: "pointer" }}>
           Logout
@@ -166,24 +121,10 @@ export default function Layout({ token, setToken }) {
     },
   ];
 
-  /* ====================
-     JSX returned by component
-     ====================
-     - AntLayout is the root layout container
-     - Sider is fixed to the left
-     - Content is shifted right by sider width so it doesn't sit underneath the Sider
-  */
   return (
+    // Root layout fills the viewport.
     <AntLayout style={{ height: "100vh", overflow: "hidden" }}>
-      {/* -----------------
-          Centered logo
-          -----------------
-          We position the logo using:
-            left: calc(SIDER_WIDTH / 2) or calc(SIDER_COLLAPSED_WIDTH / 2)
-            transform: translateX(-50%) to truly center it horizontally.
-          The logo container uses zIndex so it sits above the sider visually.
-          The logo has a fixed size so it does not change when the sider collapses.
-      */}
+      {/* Centered logo that sits above the sidebar. left uses calc to stay centered when collapsed or expanded. */}
       <div
         style={{
           position: "fixed",
@@ -199,13 +140,12 @@ export default function Layout({ token, setToken }) {
           justifyContent: "center",
         }}
       >
-        {/* clicking the logo navigates home */}
         <Link to="/" style={{ display: "block" }}>
           <img
             src={gitGhost}
             alt="logo"
             style={{
-              height: LOGO_SIZE, // fixed height so it doesn't scale with collapse
+              height: LOGO_SIZE,
               width: "auto",
               objectFit: "contain",
               display: "block",
@@ -214,16 +154,11 @@ export default function Layout({ token, setToken }) {
         </Link>
       </div>
 
-      {/* -----------------
-          Sidebar (Sider)
-          -----------------
-          Fixed position on the left of the viewport.
-          top: 0 so the sidebar covers the full height; the logo overlays it using z-index.
-      */}
+      {/* Sidebar (fixed on the left) */}
       <Sider
         collapsible
-        collapsed={collapsed} // controlled collapsed state
-        onCollapse={(val) => setCollapsed(val)} // toggle handler when user clicks collapse icon
+        collapsed={collapsed}
+        onCollapse={(val) => setCollapsed(val)}
         width={SIDER_WIDTH}
         collapsedWidth={SIDER_COLLAPSED_WIDTH}
         style={{
@@ -231,13 +166,10 @@ export default function Layout({ token, setToken }) {
           left: 0,
           top: 0,
           bottom: 0,
-          overflow: "hidden", // prevent sider itself from scrolling
+          overflow: "hidden",
         }}
       >
-        {/* Ant Menu rendered with items prop to avoid deprecation warning.
-            We supply selectedKeys so the current page is highlighted.
-            paddingTop pushes menu items below the logo.
-        */}
+        {/* Menu starts just below the logo with reduced padding */}
         <Menu
           theme="dark"
           mode="inline"
@@ -246,8 +178,7 @@ export default function Layout({ token, setToken }) {
           style={{ borderRight: 0, height: "100%", paddingTop: menuPaddingTop }}
         />
 
-        {/* Collapse/expand control (manual because we used a fixed sider).
-            Positioned in the bottom-right of the sider. */}
+        {/* Collapse toggle at the bottom-right of the sider */}
         <div style={{ position: "absolute", right: 12, bottom: 12 }}>
           {collapsed ? (
             <MenuUnfoldOutlined
@@ -263,17 +194,12 @@ export default function Layout({ token, setToken }) {
         </div>
       </Sider>
 
-      {/* -----------------
-          Main content area
-          -----------------
-          marginLeft makes room for the sidebar so the content is not underneath it.
-          marginTop is a small offset so content doesn't butt up directly at the top.
-          Content area uses overflow: auto so inner content scrolls if it's taller than the area.
-      */}
+      {/* Main area shifted right so it doesn't sit under the sider.
+          We removed top margins and reduced padding so content is closer to the top. */}
       <AntLayout
         style={{
           marginLeft: collapsed ? SIDER_COLLAPSED_WIDTH : SIDER_WIDTH,
-          marginTop: 8,
+          marginTop: 0,
           height: "100vh",
           overflow: "hidden",
           transition: "margin-left .2s",
@@ -281,15 +207,16 @@ export default function Layout({ token, setToken }) {
       >
         <Content
           style={{
-            margin: 16,
-            padding: 24,
+            margin: 0, // no outer margin
+            padding: 12, // smaller inner padding so content is nearer top
             background: "#fff",
             height: "100%",
-            overflow: "auto",
+            display: "flex",
+            flexDirection: "column",
+            overflow: "hidden", // prevent scrollbars here
           }}
         >
-          {/* Outlet is where nested routes render their components (react-router). */}
-          <Outlet />
+          <Outlet /> {/* nested route content appears here */}
         </Content>
       </AntLayout>
     </AntLayout>
