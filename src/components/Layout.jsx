@@ -16,7 +16,9 @@ import {
   GlobalOutlined,
   LogoutOutlined,
 } from "@ant-design/icons";
-import gitGhost from "../../img/Light-Ghost.png"; // adjust path if needed
+// Import your logo image. Adjust the path if your file lives somewhere else.
+import gitGhost from "../../img/Light-Ghost.png";
+// Ant styles (quick start). In production you may import theme CSS differently.
 import "antd/dist/antd.css";
 
 const { Sider, Content } = AntLayout;
