@@ -8,7 +8,7 @@ import { useState } from "react";
 
 export default function Dashboard() {
   const { applications } = useApplications();
-  const [toggle, setToggle] = useState(false);
+  const [toggle, setToggle] = useState("upcoming");
 
   const appliedCount = applications.filter(
     (curApp) => curApp.status === "Applied",
@@ -85,7 +85,11 @@ export default function Dashboard() {
         {/* Follow-ups Section*/}
         <section className="followUpSection">
           <section className="followUpToggle">
-            <h3>{!toggle ? "Upcoming Follow-Ups" : "Overdue Follow-ups"}</h3>
+            <h3>
+              {toggle === "upcoming"
+                ? "Upcoming Follow-Ups"
+                : "Overdue Follow-ups"}
+            </h3>
             <FollowUpToggle toggle={toggle} setToggle={setToggle} />
           </section>
           <FollowUps applications={applications} toggle={toggle} />

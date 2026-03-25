@@ -1,14 +1,23 @@
-import { Space, Switch } from "antd";
+import { Tabs } from "antd";
+import { ExclamationOutlined, ClockCircleOutlined } from "@ant-design/icons";
 
 export default function FollowUpToggle({ toggle, setToggle }) {
   return (
-    <Space vertical>
-      <Switch
-        checked={toggle}
-        onChange={setToggle}
-        checkedChildren="Overdue"
-        unCheckedChildren="Upcoming"
-      />
-    </Space>
+    <Tabs
+      activeKey={toggle}
+      onChange={(key) => setToggle(key)}
+      items={[
+        {
+          key: "upcoming",
+          label: "Upcoming",
+          icon: <ClockCircleOutlined />,
+        },
+        {
+          key: "overdue",
+          label: "Overdue",
+          icon: <ExclamationOutlined />,
+        },
+      ]}
+    />
   );
 }

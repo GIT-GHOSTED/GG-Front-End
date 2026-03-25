@@ -20,7 +20,8 @@ export default function FollowUps({ applications, toggle }) {
     return followUpDate < today;
   });
 
-  const toggleFollowups = toggle ? overdueFollows : upcomingFollowUps;
+  const toggleFollowups =
+    toggle === "upcoming" ? upcomingFollowUps : overdueFollows;
 
   const sortedFollowUps = [...toggleFollowups].sort(
     (a, b) => new Date(a.followup_date) - new Date(b.followup_date),
