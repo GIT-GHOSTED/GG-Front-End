@@ -66,3 +66,9 @@ section > p {
   border-radius: 12px;
   margin-top: 20px;
 }
+
+.followUpToggle {
+  display: grid;
+  grid-template-columns: 70% 30%;
+  align-items: center;
+}

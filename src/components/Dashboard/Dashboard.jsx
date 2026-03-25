@@ -3,9 +3,12 @@ import "./Dashboard.css";
 import { useApplications } from "../../context/applicationsContext";
 import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
 import FollowUps from "../FollowUps/FollowUps";
+import FollowUpToggle from "../FollowUps/FollowUpToggle";
+import { use, useState } from "react";
 
 export default function Dashboard() {
   const { applications } = useApplications();
+  const [toggle, setToggle] = useState("");
 
   const appliedCount = applications.filter(
     (curApp) => curApp.status === "Applied",
@@ -81,7 +84,10 @@ export default function Dashboard() {
 
         {/* Follow-ups Section*/}
         <section className="followUpSection">
-          <h3>Upcoming Follow-Ups</h3>
+          <section className="followUpToggle">
+            <h3>Upcoming Follow-Ups</h3>
+            <FollowUpToggle />
+          </section>
           <FollowUps applications={applications} />
         </section>
       </section>
