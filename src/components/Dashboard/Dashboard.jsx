@@ -18,7 +18,7 @@ export default function Dashboard() {
 
   //* Counts all application that contain status word "applied"
   const appliedCount = applications.filter(
-    (curApp) => curApp.status === "Applied",
+    (currApp) => currApp.status === "Applied",
   ).length;
 
   //* Counts all application that contain status word "interview"

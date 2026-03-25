@@ -1,15 +1,30 @@
-/* TODO ADD BETTER COMMENTS */
+/* //* ---------------- DASHBOARD LAYOUT ---------------- */
+
+/* //* Main container for entire dashboard page layout */
 .topSection {
   height: 100%;
   margin: 0%;
-  overflow: hidden;
 }
+
+/* //* Layout for top row: pie chart on left, follow-ups on right */
+.topRow {
+  display: grid;
+  grid-template-columns: 40% 60%;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+/* //* ---------------- SUMMARY/STATS SECTION ---------------- */
+
+/* //* Displays summary statistic boxes (total apps, interviews, etc.) in a 5-column grid */
 .appDetails {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 20px;
   margin-bottom: 20px;
 }
+
+/* //* Individual data box used to display a single stat (number + label) */
 .dataBox {
   display: flex;
   border-radius: 12px;
@@ -18,58 +33,30 @@
   text-align: center;
   height: 50px;
 
+  /* //* Centers content vertically inside each data box */
   flex-direction: column;
   justify-content: center;
 }
 
-.topRow {
-  display: grid;
-  grid-template-columns: 40% 60%;
-  gap: 20px;
-  margin-top: 20px;
-}
+/* //* ---------------- PIE CHART SECTION ---------------- */
 
-/* Shared section styling */
+/* //* Container for pie chart visualization section */
 .pieChartSection {
   background-color: #f9fafb;
   padding: 15px;
   border-radius: 12px;
   margin-top: 20px;
 }
-.recentApps {
-  background-color: #f9fafb;
-  padding: 15px;
-  border-radius: 12px;
-  margin-top: 20px;
-}
 
+/* //* Aligns pie chart within its container */
 .chartWrapper {
   display: flex;
   justify-content: flex-start;
 }
 
-/* Recent activity */
-.recentAppList {
-  display: flex;
-  justify-content: space-between;
-  padding: 10px 0;
-  border-bottom: 1px solid #e5e7eb;
-}
+/* //* ---------------- FOLLOW-UP SECTION ---------------- */
 
-.recentAppList:last-child {
-  border-bottom: none;
-}
-
-.recentAppList > section {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-section > p {
-  margin: 0;
-}
-
+/* //* Container for follow-up tasks section (upcoming + overdue) */
 .followUpSection {
   background-color: #f9fafb;
   padding: 15px;
@@ -77,8 +64,44 @@ section > p {
   margin-top: 20px;
 }
 
+/* //* Layout for follow-up header and toggle buttons */
 .followUpToggle {
   display: grid;
   grid-template-columns: 70% 30%;
   align-items: center;
+}
+
+/* //* ---------------- RECENT ACTIVITY SECTION ---------------- */
+
+/* //* Container for recent applications/activity list */
+.recentApps {
+  background-color: #f9fafb;
+  padding: 15px;
+  border-radius: 12px;
+  margin-top: 20px;
+}
+
+/* //* Styles each row in the recent activity list */
+.recentAppList {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* //* Removes bottom border for last item in recent activity list */
+.recentAppList:last-child {
+  border-bottom: none;
+}
+
+/* //* Organizes text (company, role, date, status) into vertical columns */
+.recentAppList > section {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+/* //* Removes default paragraph margin for tighter layout */
+section > p {
+  margin: 0;
 }
