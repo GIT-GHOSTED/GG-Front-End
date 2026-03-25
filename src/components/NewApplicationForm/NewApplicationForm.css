@@ -1,4 +1,6 @@
-/* TODO ADD BETTER COMMENTS */
+/* //* ---------------- FORM OVERLAY/MODAL ---------------- */
+
+/* //* Full-screen overlay that darkens background and centers form modal */
 .formOverlay {
   position: fixed;
   top: 0;
@@ -6,40 +8,49 @@
   width: 100%;
   height: 100%;
 
+  /* //* Semi-transparent background to focus attention on form */
   background: rgba(0, 0, 0, 0.5);
 
+  /* //* Centers form horizontally and vertically */
   display: flex;
   justify-content: center;
   align-items: center;
 
+  /* //* Ensures overlay appears above all other content */
   z-index: 1000;
 }
 
+/* //* Main container for form content */
 .formContent {
   background: white;
   padding: 25px;
   border-radius: 12px;
   width: 400px;
+
+  /* //* Prevents form from exceeding viewport height */
   max-height: 90vh;
   overflow-y: auto;
 
+  /* //* Adds subtle shadow for modal elevation effect */
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
-/* Grid layout for inputs */
+/* //* ---------------- FORM INPUT GRID ---------------- */
+
+/* //* Grid layout used to organize all form input fields */
 .formGrid {
   display: grid;
   gap: 12px;
 }
 
-/* Label styling */
+/* //* Styles labels and groups input fields vertically */
 .formGrid label {
   display: grid;
   font-size: 0.9rem;
   color: #374151;
 }
 
-/* Inputs */
+/* //* Styles all input fields for consistent spacing and appearance */
 .formGrid input {
   margin-top: 4px;
   padding: 8px;
@@ -47,7 +58,9 @@
   border: 1px solid #d1d5db;
 }
 
-/* Buttons */
+/* //* ---------------- FORM ACTION BUTTONS ---------------- */
+
+/* //* Container for form action buttons (Save + Cancel) */
 .formActions {
   display: flex;
   justify-content: flex-end;
@@ -55,6 +68,7 @@
   margin-top: 15px;
 }
 
+/* //* Shared button styling for all form action buttons */
 .formActions button {
   height: 32px;
   width: 60px;
@@ -63,13 +77,13 @@
   cursor: pointer;
 }
 
-/* Selecting the "Submit Button" and adding style to it */
+/* //* Styles submit button to highlight primary action */
 .formActions button[type="submit"] {
   background-color: #6366f1;
   color: white;
 }
 
-/* Selecting the Cancel Button" and adding style to it */
+/* //* Styles cancel button as secondary/neutral action */
 .formActions button[type="button"] {
   background-color: #e5e7eb;
 }
