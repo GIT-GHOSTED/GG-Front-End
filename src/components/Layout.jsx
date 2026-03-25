@@ -24,6 +24,16 @@ import "antd/dist/antd.css";
 
 const { Sider, Content } = AntLayout;
 
+/* =============
+   Constants
+   =============
+   These values control visual layout. Tweak them for spacing/size.
+*/
+const LOGO_TOP = 12; // distance from top of viewport to top of logo (px)
+const LOGO_SIZE = 85; // fixed height of logo (px)
+const SIDER_WIDTH = 260; // width of expanded sidebar (px)
+const SIDER_COLLAPSED_WIDTH = 80; // width when sidebar is collapsed (px)
+
 /* Layout component
    - token: the current authentication token (string or null)
    - setToken: function to update token (used for logout)

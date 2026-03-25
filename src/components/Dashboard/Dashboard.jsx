@@ -1,4 +1,5 @@
 import "./Dashboard.css";
+import { useState } from "react";
 import { useApplications } from "../../context/applicationsContext";
 import {
   PieChart,
@@ -9,10 +10,12 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import FollowUps from "../FollowUps/FollowUps";
+import FollowUpToggle from "../FollowUps/FollowUpToggle";
 import { theme as antdTheme } from "antd";
 
 export default function Dashboard() {
   const { applications } = useApplications();
+  const [toggle, setToggle] = useState("upcoming"); // track follow-up tab: 'upcoming' or 'overdue'
   // Step 1: Extract Ant Design theme tokens for use in Recharts components.
   //   Purpose: Use dynamic colors (colorText, colorBgElevated) that respond to theme mode
   //   Instead of hardcoding colors, we pull from Ant Design's theme to stay in sync
