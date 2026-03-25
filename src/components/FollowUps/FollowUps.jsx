@@ -1,6 +1,6 @@
 import "./FollowUps.css";
 
-export default function FollowUps({ applications }) {
+export default function FollowUps({ applications, toggle }) {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
@@ -8,14 +8,22 @@ export default function FollowUps({ applications }) {
   threeDaysLater.setDate(today.getDate() + 3);
   threeDaysLater.setHours(23, 59, 59, 999);
 
-  const followUps = applications.filter((app) => app.followup_date);
+  const followUps = applications.filter((currApp) => currApp.followup_date);
 
-  const upcomingFollowUps = followUps.filter((app) => {
-    const followUpDate = new Date(app.followup_date);
+  const upcomingFollowUps = followUps.filter((currApp) => {
+    const followUpDate = new Date(currApp.followup_date);
     return followUpDate >= today && followUpDate <= threeDaysLater;
   });
 
-  const sortedFollowUps = upcomingFollowUps.sort(
+  const overdueFollows = followUps.filter((currApp) => {
+    const followUpDate = new Date(currApp.followup_date);
+    return followUpDate < today;
+  });
+
+  const toggleFollowups =
+    toggle === "upcoming" ? upcomingFollowUps : overdueFollows;
+
+  const sortedFollowUps = [...toggleFollowups].sort(
     (a, b) => new Date(a.followup_date) - new Date(b.followup_date),
   );
 
@@ -24,13 +32,13 @@ export default function FollowUps({ applications }) {
   return (
     <section className="followUpOverflow">
       <ul>
-        {sortedFollowUps.map((app) => (
-          <li key={app.id} className="followUpList">
+        {sortedFollowUps.map((currApp) => (
+          <li key={currApp.id} className="followUpList">
             <section>
-              <p>{app.company}</p>
-              <p>{app.role}</p>
+              <p>{currApp.company}</p>
+              <p>{currApp.role}</p>
             </section>
-            <p>{new Date(app.followup_date).toLocaleDateString()}</p>
+            <p>{new Date(currApp.followup_date).toLocaleDateString()}</p>
           </li>
         ))}
       </ul>

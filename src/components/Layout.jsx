@@ -25,7 +25,7 @@ import {
   LogoutOutlined,
 } from "@ant-design/icons";
 // Import your logo image. Adjust the path if your file lives somewhere else.
-import gitGhost from "../../img/Dark-Ghost.png";
+import gitGhost from "../../img/Light-Ghost.png";
 // Ant styles (quick start). In production you may import theme CSS differently.
 import "antd/dist/antd.css";
 

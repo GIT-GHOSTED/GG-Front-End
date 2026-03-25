@@ -41,16 +41,10 @@ export default function Dashboard() {
   // Data for recent applications
   const recentApps = applications.slice(0, 4);
 
-  const today = new Date();
-  const threeDaysLater = new Date();
-  threeDaysLater.setDate(today.getDate() + 3);
-
-  const followUps = applications.filter((app) => app.followup_date); // only apps that have a follow-up
-
   const COLORS = ["#8884d8", "#ffc658", "#82ca9d", "#ff6b6b", "#2b2a2a"];
 
   return (
-    <section style={{ padding: "1rem" }}>
+    <section>
       <h2>Dashboard</h2>
 
       <section className="appDetails">
