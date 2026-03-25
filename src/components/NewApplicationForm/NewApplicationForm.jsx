@@ -2,7 +2,8 @@ import { useState } from "react";
 import "./NewApplicationForm.css";
 import { useApplications } from "../../context/applicationsContext";
 
-//* Component renders a form that allows user to create and submit a new job application
+//* Component renders a form that allows user to create and submit
+//* a new job application
 export default function NewApplicationForm({ showForm, setShowForm }) {
   //* useState object stores all form input values for a new application
   const [formData, setFormData] = useState({
@@ -23,7 +24,8 @@ export default function NewApplicationForm({ showForm, setShowForm }) {
   //* Retrieve stored authentication token for authorized requests
   const token = localStorage.getItem("token");
 
-  //* Function from context used to refresh applications after new one is added
+  //* Function from context used to refresh applications after new
+  //* one is added
   const { loadApplications } = useApplications();
 
   //* Handles input changes by updating corresponding field in formData state

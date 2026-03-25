@@ -1,11 +1,13 @@
 import { Tabs } from "antd";
 import { ExclamationOutlined, ClockCircleOutlined } from "@ant-design/icons";
 
-//* Component renders tab toggle that allows user to switch between "Upcoming" and "Overdue" follow-ups
+//* Component renders tab toggle that allows user to switch
+//* between "Upcoming" and "Overdue" follow-ups
 export default function FollowUpToggle({ toggle, setToggle }) {
   return (
     <Tabs
-      //* "activeKey" determines which tab is currently selected based on toggle state
+      //* "activeKey" determines which tab is currently selected
+      //* based on toggle state
       activeKey={toggle}
       //* Updates toggle state when user switches between tabs
       onChange={(key) => setToggle(key)}

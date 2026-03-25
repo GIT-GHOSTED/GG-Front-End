@@ -1,12 +1,14 @@
 import "./FollowUps.css";
 
-//* Component filters and displays follow-up tasks based on selected toggle (upcoming or overdue)
+//* Component filters and displays follow-up tasks based on
+//* selected toggle (upcoming or overdue)
 export default function FollowUps({ applications, toggle }) {
   //* Creates date object for today and normalize time to start of day
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
-  //* Creates date object representing 3 days from today (end of that day)
+  //* Creates date object representing 3 days from today
+  //* (end of that day)
   const threeDaysLater = new Date();
   threeDaysLater.setDate(today.getDate() + 3);
   threeDaysLater.setHours(23, 59, 59, 999);

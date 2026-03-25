@@ -44,7 +44,8 @@ export default function Dashboard() {
   //* Counts total application user has filled out
   const totalApps = applications.length;
 
-  //* Count variables above are saved in array to display data in PieChart format
+  //* Count variables above are saved in array to display data
+  //* in PieChart format
   const statusData = [
     { name: "Applied", value: appliedCount },
     { name: "Interviewed", value: interviewCount },
