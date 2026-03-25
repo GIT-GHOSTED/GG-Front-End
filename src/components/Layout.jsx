@@ -17,8 +17,9 @@ import {
   GlobalOutlined,
   LogoutOutlined,
 } from "@ant-design/icons";
-// Import your logo image. Adjust the path if your file lives somewhere else.
-import gitGhost from "../../img/Light-Ghost.png";
+// Import both logo variants and switch based on current theme mode.
+import lightGhost from "../../img/Light-Ghost.png";
+import darkGhost from "../../img/Dark-Ghost.png";
 // Ant styles (quick start). In production you may import theme CSS differently.
 import "antd/dist/antd.css";
 
@@ -137,6 +138,9 @@ export default function Layout({ token, setToken, themeMode }) {
   ];
 
   const isDarkMode = themeMode === "dark";
+  const sidebarBg = "#001529";
+  const siderIconColor = "#fff";
+  const sidebarLogo = isDarkMode ? darkGhost : lightGhost;
 
   /* ====================
      JSX returned by component
@@ -166,7 +170,7 @@ export default function Layout({ token, setToken, themeMode }) {
       >
         <Link to="/" style={{ display: "block" }}>
           <img
-            src={gitGhost}
+            src={sidebarLogo}
             alt="logo"
             style={{
               height: LOGO_SIZE,
@@ -191,15 +195,21 @@ export default function Layout({ token, setToken, themeMode }) {
           top: 0,
           bottom: 0,
           overflow: "hidden",
+          background: sidebarBg,
         }}
       >
         {/* Menu starts just below the logo with reduced padding */}
         <Menu
-          theme={isDarkMode ? "dark" : "light"}
+          theme="dark"
           mode="inline"
           selectedKeys={[selectedKey]}
           items={menuItems}
-          style={{ borderRight: 0, height: "100%", paddingTop: menuPaddingTop }}
+          style={{
+            borderRight: 0,
+            height: "100%",
+            paddingTop: menuPaddingTop,
+            background: sidebarBg,
+          }}
         />
 
         {/* Collapse toggle at the bottom-right of the sider */}
@@ -207,12 +217,12 @@ export default function Layout({ token, setToken, themeMode }) {
           {collapsed ? (
             <MenuUnfoldOutlined
               onClick={() => setCollapsed(false)}
-              style={{ fontSize: 18, cursor: "pointer", color: "#fff" }}
+              style={{ fontSize: 18, cursor: "pointer", color: siderIconColor }}
             />
           ) : (
             <MenuFoldOutlined
               onClick={() => setCollapsed(true)}
-              style={{ fontSize: 18, cursor: "pointer", color: "#fff" }}
+              style={{ fontSize: 18, cursor: "pointer", color: siderIconColor }}
             />
           )}
         </div>
