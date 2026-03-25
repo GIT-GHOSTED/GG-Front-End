@@ -1,4 +1,26 @@
-img {
-  width: 200px;
-  height: 200px;
+/* ==============================
+   LIGHT/DARK MODE GLOBAL STYLES
+   ==============================
+   The App.jsx component sets a data-theme attribute on document.body.
+   These CSS rules apply global background and text colors based on that attribute.
+   All child components inherit these colors unless they override them with their own.
+*/
+
+/* Light mode: light gray background with dark text for readability. */
+body[data-theme="light"] {
+  background: #f5f5f5;
+  color: #1f1f1f;
+}
+
+/* Dark mode: dark background with light text for accessibility in low-light environments. */
+body[data-theme="dark"] {
+  background: #141414;
+  color: #f5f5f5;
+}
+
+/* Smooth transition between modes to avoid jarring color changes. */
+body {
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
 }

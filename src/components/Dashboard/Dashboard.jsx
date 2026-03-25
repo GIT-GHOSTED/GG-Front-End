@@ -3,9 +3,15 @@ import "./Dashboard.css";
 import { useApplications } from "../../context/applicationsContext";
 import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
 import FollowUps from "../FollowUps/FollowUps";
+import { theme as antdTheme } from "antd";
 
 export default function Dashboard() {
   const { applications } = useApplications();
+  // Step 1: Extract Ant Design theme tokens for use in Recharts components.
+  //   Purpose: Use dynamic colors (colorText, colorBgElevated) that respond to theme mode
+  //   Instead of hardcoding colors, we pull from Ant Design's theme to stay in sync
+  //   Result: Chart tooltip and legend colors match the current light/dark theme
+  const { token: antdToken } = antdTheme.useToken();
 
   const appliedCount = applications.filter(
     (curApp) => curApp.status === "Applied",
@@ -50,7 +56,7 @@ export default function Dashboard() {
   const COLORS = ["#8884d8", "#ffc658", "#82ca9d", "#ff6b6b", "#2b2a2a"];
 
   return (
-    <section style={{ padding: "1rem" }}>
+    <section>
       <h2>Dashboard</h2>
 
       <section className="appDetails">
@@ -80,8 +86,33 @@ export default function Dashboard() {
               ))}
             </Pie>
 
-            <Tooltip />
-            <Legend layout="vertical" verticalAlign="middle" align="left" />
+            {/* Tooltip: Show data on hover with theme-aware colors.
+                - contentStyle: background and text colors match current theme token
+                - itemStyle / labelStyle: Ensures tooltip text is readable in light/dark mode
+                - Colors pulled from antdToken so they stay in sync with theme toggle
+            */}
+            <Tooltip
+              contentStyle={{
+                backgroundColor: antdToken.colorBgElevated,
+                borderColor: antdToken.colorBorder,
+                color: antdToken.colorText,
+              }}
+              itemStyle={{ color: antdToken.colorText }}
+              labelStyle={{ color: antdToken.colorText }}
+            />
+            {/* Legend: Show status labels below chart with theme-aware colors.
+                - layout/verticalAlign/align: Position legend on left side vertically
+                - formatter: Custom function wraps text in span with theme-aware color
+                - Result: Legend labels remain visible and readable in both light and dark modes
+            */}
+            <Legend
+              layout="vertical"
+              verticalAlign="middle"
+              align="left"
+              formatter={(value) => (
+                <span style={{ color: antdToken.colorText }}>{value}</span>
+              )}
+            />
           </PieChart>
         </section>
 

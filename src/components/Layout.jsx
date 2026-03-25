@@ -13,7 +13,7 @@ import {
   Link,
   useNavigate,
 } from "react-router-dom";
-import { Layout as AntLayout, Menu } from "antd";
+import { Layout as AntLayout, Menu, theme as antdTheme } from "antd";
 // Ant Design icon imports. You can swap icons for others from @ant-design/icons
 import {
   MenuFoldOutlined,
@@ -43,12 +43,14 @@ const SIDER_COLLAPSED_WIDTH = 80; // width when sidebar is collapsed (px)
 /* Layout component
    - token: the current authentication token (string or null)
    - setToken: function to update token (used for logout)
+   - themeMode: current theme ('dark' or 'light') passed from App for sidebar styling
 */
-export default function Layout({ token, setToken }) {
+export default function Layout({ token, setToken, themeMode }) {
   // useLocation gives us the current URL path so we can mark the active menu item.
   const location = useLocation();
   // useNavigate lets us programmatically navigate (used after logout).
   const navigate = useNavigate();
+  const { token: antdToken } = antdTheme.useToken();
 
   /* Prevent page-level scrolling while this layout is mounted.
      We set document.body.style.overflow = "hidden" on mount
@@ -166,6 +168,8 @@ export default function Layout({ token, setToken }) {
     },
   ];
 
+  const isDarkMode = themeMode === "dark";
+
   /* ====================
      JSX returned by component
      ====================
@@ -239,7 +243,7 @@ export default function Layout({ token, setToken }) {
             paddingTop pushes menu items below the logo.
         */}
         <Menu
-          theme="dark"
+          theme={isDarkMode ? "dark" : "light"}
           mode="inline"
           selectedKeys={[selectedKey]}
           items={menuItems}
@@ -283,7 +287,8 @@ export default function Layout({ token, setToken }) {
           style={{
             margin: 16,
             padding: 24,
-            background: "#fff",
+            background: antdToken.colorBgContainer,
+            color: antdToken.colorText,
             height: "100%",
             overflow: "auto",
           }}

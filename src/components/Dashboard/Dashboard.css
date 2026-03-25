@@ -66,3 +66,31 @@ section > p {
   border-radius: 12px;
   margin-top: 20px;
 }
+
+/* Dark mode styles for dashboard text and cards */
+body[data-theme="dark"] .appDetails .dataBox,
+body[data-theme="dark"] .pieChartSection,
+body[data-theme="dark"] .recentApps,
+body[data-theme="dark"] .followUpSection {
+  background-color: #1f1f1f;
+  color: #f5f5f5;
+}
+
+/* Dark mode: Recent applications list border color
+   - Changes from light gray (#e5e7eb) to darker gray (#303030) for subtle separation
+*/
+body[data-theme="dark"] .recentAppList {
+  border-bottom: 1px solid #303030;
+}
+
+/* Dark mode: All text within dashboard sections
+   - Ensures headers (h3), paragraphs (p) are light colored for accessibility
+   - Explicitly targeting all text nodes since they may inherit dark text otherwise
+*/
+body[data-theme="dark"] .appDetails .dataBox p,
+body[data-theme="dark"] .pieChartSection h3,
+body[data-theme="dark"] .recentApps h3,
+body[data-theme="dark"] .followUpSection h3,
+body[data-theme="dark"] .recentAppList p {
+  color: #f5f5f5;
+}
