@@ -1,4 +1,9 @@
 /* TODO ADD BETTER COMMENTS */
+.topSection {
+  height: 100%;
+  margin: 0%;
+  overflow: hidden;
+}
 .appDetails {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -19,13 +24,18 @@
 
 .topRow {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 40% 60%;
   gap: 20px;
   margin-top: 20px;
 }
 
 /* Shared section styling */
-.pieChartSection,
+.pieChartSection {
+  background-color: #f9fafb;
+  padding: 15px;
+  border-radius: 12px;
+  margin-top: 20px;
+}
 .recentApps {
   background-color: #f9fafb;
   padding: 15px;

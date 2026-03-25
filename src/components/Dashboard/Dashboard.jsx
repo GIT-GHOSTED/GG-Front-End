@@ -1,7 +1,14 @@
 // TODO ADD BETTER COMMENTS
 import "./Dashboard.css";
 import { useApplications } from "../../context/applicationsContext";
-import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
+import {
+  PieChart,
+  Pie,
+  Cell,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from "recharts";
 import FollowUps from "../FollowUps/FollowUps";
 import FollowUpToggle from "../FollowUps/FollowUpToggle";
 import { useState } from "react";
@@ -47,7 +54,7 @@ export default function Dashboard() {
   const COLORS = ["#8884d8", "#ffc658", "#82ca9d", "#ff6b6b", "#2b2a2a"];
 
   return (
-    <section>
+    <section className="topSection">
       <h2>Dashboard</h2>
 
       <section className="appDetails">
@@ -64,22 +71,24 @@ export default function Dashboard() {
           <h3>Status Breakdown</h3>
 
           {/* Implementing Pie Chart component */}
-          <PieChart width={400} height={200}>
-            <Pie
-              data={statusData}
-              cx="30%"
-              cy="50%"
-              outerRadius={90}
-              dataKey="value"
-            >
-              {statusData.map((entry, index) => (
-                <Cell key={index} fill={COLORS[index % COLORS.length]} />
-              ))}
-            </Pie>
+          <ResponsiveContainer width="100%" height={300}>
+            <PieChart>
+              <Pie
+                data={statusData}
+                cx="50%"
+                cy="50%"
+                outerRadius="100%"
+                dataKey="value"
+              >
+                {statusData.map((entry, index) => (
+                  <Cell key={index} fill={COLORS[index % COLORS.length]} />
+                ))}
+              </Pie>
 
-            <Tooltip />
-            <Legend layout="vertical" verticalAlign="middle" align="left" />
-          </PieChart>
+              <Tooltip />
+              <Legend layout="vertical" verticalAlign="middle" align="left" />
+            </PieChart>
+          </ResponsiveContainer>
         </section>
 
         {/* Follow-ups Section*/}
