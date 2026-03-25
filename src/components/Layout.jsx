@@ -6,7 +6,8 @@ import {
   Link,
   useNavigate,
 } from "react-router-dom";
-import { Layout as AntLayout, Menu } from "antd";
+import { Layout as AntLayout, Menu, theme as antdTheme } from "antd";
+// Ant Design icon imports. You can swap icons for others from @ant-design/icons
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
@@ -23,15 +24,17 @@ import "antd/dist/antd.css";
 
 const { Sider, Content } = AntLayout;
 
-// Tweak these to change spacing and sizes
-const LOGO_TOP = 6; // smaller top offset so logo is nearer the top
-const LOGO_SIZE = 64; // slightly smaller fixed logo height
-const SIDER_WIDTH = 260; // expanded sidebar width
-const SIDER_COLLAPSED_WIDTH = 80; // collapsed sidebar width
-
-export default function Layout({ token, setToken }) {
-  const location = useLocation(); // current URL path
-  const navigate = useNavigate(); // navigate programmatically
+/* Layout component
+   - token: the current authentication token (string or null)
+   - setToken: function to update token (used for logout)
+   - themeMode: current theme ('dark' or 'light') passed from App for sidebar styling
+*/
+export default function Layout({ token, setToken, themeMode }) {
+  // useLocation gives us the current URL path so we can mark the active menu item.
+  const location = useLocation();
+  // useNavigate lets us programmatically navigate (used after logout).
+  const navigate = useNavigate();
+  const { token: antdToken } = antdTheme.useToken();
 
   // Disable body scrolling while this layout is mounted.
   useEffect(() => {
@@ -123,6 +126,15 @@ export default function Layout({ token, setToken }) {
     },
   ];
 
+  const isDarkMode = themeMode === "dark";
+
+  /* ====================
+     JSX returned by component
+     ====================
+     - AntLayout is the root layout container
+     - Sider is fixed to the left
+     - Content is shifted right by sider width so it doesn't sit underneath the Sider
+  */
   return (
     // Root layout fills the viewport.
     <AntLayout style={{ height: "100vh", overflow: "hidden" }}>
@@ -173,7 +185,7 @@ export default function Layout({ token, setToken }) {
       >
         {/* Menu starts just below the logo with reduced padding */}
         <Menu
-          theme="dark"
+          theme={isDarkMode ? "dark" : "light"}
           mode="inline"
           selectedKeys={[selectedKey]}
           items={menuItems}
@@ -209,9 +221,10 @@ export default function Layout({ token, setToken }) {
       >
         <Content
           style={{
-            margin: 0, // no outer margin
-            padding: 12, // smaller inner padding so content is nearer top
-            background: "#fff",
+            margin: 16,
+            padding: 24,
+            background: antdToken.colorBgContainer,
+            color: antdToken.colorText,
             height: "100%",
             display: "flex",
             flexDirection: "column",

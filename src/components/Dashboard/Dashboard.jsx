@@ -9,12 +9,15 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import FollowUps from "../FollowUps/FollowUps";
-import FollowUpToggle from "../FollowUps/FollowUpToggle";
-import { useState } from "react";
+import { theme as antdTheme } from "antd";
 
 export default function Dashboard() {
   const { applications } = useApplications();
-  const [toggle, setToggle] = useState("upcoming");
+  // Step 1: Extract Ant Design theme tokens for use in Recharts components.
+  //   Purpose: Use dynamic colors (colorText, colorBgElevated) that respond to theme mode
+  //   Instead of hardcoding colors, we pull from Ant Design's theme to stay in sync
+  //   Result: Chart tooltip and legend colors match the current light/dark theme
+  const { token: antdToken } = antdTheme.useToken();
 
   //* Counts all application that contain status word "applied"
   const appliedCount = applications.filter(
@@ -79,31 +82,48 @@ export default function Dashboard() {
         <section className="pieChartSection">
           <h3>Status Breakdown</h3>
 
-          {/*  //* ResponsiveContainer allows PieChart to grow and shrink according
-          //* to user's screen size */}
-          <ResponsiveContainer width="100%" height={300}>
-            <PieChart>
-              {/* //* Pie actually renders piechart diagram. Data inside is used 
-              //* to localize and change dimensions of piechart */}
-              <Pie
-                data={statusData}
-                cx="50%"
-                cy="50%"
-                outerRadius="100%"
-                dataKey="value"
-              >
-                {/* //* Count variables above are applied a color given corresponding 
-                //* index from "COLORS" array */}
-                {statusData.map((entry, index) => (
-                  <Cell key={index} fill={COLORS[index % COLORS.length]} />
-                ))}
-              </Pie>
+          {/* Implementing Pie Chart component */}
+          <PieChart width={400} height={200}>
+            <Pie
+              data={statusData}
+              cx="30%"
+              cy="50%"
+              outerRadius={90}
+              dataKey="value"
+            >
+              {statusData.map((entry, index) => (
+                <Cell key={index} fill={COLORS[index % COLORS.length]} />
+              ))}
+            </Pie>
 
-              <Tooltip />
-              {/* //* Allows for color legend to be localized to the left of PieChart, not underneath */}
-              <Legend layout="vertical" verticalAlign="middle" align="left" />
-            </PieChart>
-          </ResponsiveContainer>
+            {/* Tooltip: Show data on hover with theme-aware colors.
+                - contentStyle: background and text colors match current theme token
+                - itemStyle / labelStyle: Ensures tooltip text is readable in light/dark mode
+                - Colors pulled from antdToken so they stay in sync with theme toggle
+            */}
+            <Tooltip
+              contentStyle={{
+                backgroundColor: antdToken.colorBgElevated,
+                borderColor: antdToken.colorBorder,
+                color: antdToken.colorText,
+              }}
+              itemStyle={{ color: antdToken.colorText }}
+              labelStyle={{ color: antdToken.colorText }}
+            />
+            {/* Legend: Show status labels below chart with theme-aware colors.
+                - layout/verticalAlign/align: Position legend on left side vertically
+                - formatter: Custom function wraps text in span with theme-aware color
+                - Result: Legend labels remain visible and readable in both light and dark modes
+            */}
+            <Legend
+              layout="vertical"
+              verticalAlign="middle"
+              align="left"
+              formatter={(value) => (
+                <span style={{ color: antdToken.colorText }}>{value}</span>
+              )}
+            />
+          </PieChart>
         </section>
 
         {/* Follow-ups Section*/}
