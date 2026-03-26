@@ -231,6 +231,7 @@ export default function Layout({ token, setToken, themeMode }) {
           style={{
             background: antdToken.colorBgContainer,
             color: antdToken.colorText,
+            overflowY: "auto",
           }}
         >
           <Outlet /> {/* nested route content appears here */}
