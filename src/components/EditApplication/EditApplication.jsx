@@ -159,12 +159,11 @@ export default function EditApplication() {
 
         {/* Step 11f: Edit pipeline status value. */}
         <select value={formData.status} onChange={setField("status")}>
-          <option>Saved</option>
-          <option>Applied</option>
-          <option>Phone Screen</option>
-          <option>Interview</option>
-          <option>Offer</option>
-          <option>Rejected</option>
+          <option value="applied">Applied</option>
+          <option value="interview">Interview</option>
+          <option value="offer">Offer</option>
+          <option value="rejected">Rejected</option>
+          <option value="ghosted">Ghosted</option>
         </select>
 
         {/* Step 11g: Edit date applied value using date input format. */}

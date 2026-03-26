@@ -24,27 +24,27 @@ export default function Dashboard() {
 
   //* Counts all application that contain status word "applied"
   const appliedCount = applications.filter(
-    (currApp) => currApp.status === "Applied",
+    (currApp) => currApp.status === "applied",
   ).length;
 
   //* Counts all application that contain status word "interview"
   const interviewCount = applications.filter(
-    (currApp) => currApp.status === "Interview",
+    (currApp) => currApp.status === "interview",
   ).length;
 
   //* Counts all application that contain status word "offered"
   const offerCount = applications.filter(
-    (currApp) => currApp.status === "Offered",
+    (currApp) => currApp.status === "offer",
   ).length;
 
   //* Counts all application that contain status word "rejected"
   const rejectedCount = applications.filter(
-    (currApp) => currApp.status === "Rejected",
+    (currApp) => currApp.status === "rejected",
   ).length;
 
   //* Counts all application that contain status word "ghosted"
   const ghostedCount = applications.filter(
-    (currApp) => currApp.status === "Ghosted",
+    (currApp) => currApp.status === "ghosted",
   ).length;
 
   //* Counts total application user has filled out
@@ -64,7 +64,7 @@ export default function Dashboard() {
   const recentApps = applications.slice(0, 4);
 
   //* Selection of colors used for the Pie Chart
-  const COLORS = ["#8884d8", "#ffc658", "#82ca9d", "#ff6b6b", "#2b2a2a"];
+  const COLORS = ["#0d74e7", "#ffc658", "#82ca9d", "#ff6b6b", "#2b2a2a"];
 
   return (
     <section className="topSection">
@@ -74,9 +74,9 @@ export default function Dashboard() {
       //*  stylized number format   */}
       <section className="appDetails">
         <DataBox number={totalApps} tag={"Total Applications"} />
-        <DataBox number={interviewCount} tag={"Interviews"} />
+        <DataBox number={interviewCount} tag={"Interviewed"} />
         <DataBox number={rejectedCount} tag={"Rejected"} />
-        <DataBox number={offerCount} tag={"Offers"} />
+        <DataBox number={offerCount} tag={"Offered"} />
         <DataBox number={ghostedCount} tag={"Ghosted"} />
       </section>
 
