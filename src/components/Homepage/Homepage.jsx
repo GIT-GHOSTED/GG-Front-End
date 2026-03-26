@@ -1,9 +1,10 @@
 import { Link } from "react-router";
+import "./Homepage.css";
 
 export default function Homepage() {
   // Step 1: Render the homepage container.
   return (
-    <section style={{ padding: "1rem" }}>
+    <section className="homepage">
       {/* Step 2: Show the primary app welcome message. */}
       <h1>Welcome to Git Ghosted</h1>
 
@@ -11,7 +12,7 @@ export default function Homepage() {
       <h2>Track your job applications and never Git Ghosted again!</h2>
 
       {/* Step 4: Render quick navigation links for new and returning users. */}
-      <div style={{ display: "flex", gap: "0.75rem" }}>
+      <div className="homepage-links">
         {/* Step 4a: Navigate new users to registration flow. */}
         <Link to="/register">Get Started</Link>
 

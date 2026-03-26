@@ -1,0 +1,68 @@
+.layout-root {
+  height: 100vh;
+  overflow: hidden;
+}
+
+.layout-logo-container {
+  position: fixed;
+  transform: translateX(-50%);
+  z-index: 1200;
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.layout-logo-link {
+  display: block;
+}
+
+.layout-logo-image {
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
+
+.layout-sider {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  overflow: hidden;
+}
+
+.layout-menu {
+  border-right: 0;
+  height: 100%;
+}
+
+.layout-collapse-toggle {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+}
+
+.layout-collapse-icon {
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.layout-main {
+  margin-top: 0;
+  height: 100vh;
+  overflow: hidden;
+  transition: margin-left 0.2s;
+}
+
+.layout-content {
+  margin: 16px;
+  padding: 24px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.layout-logout {
+  cursor: pointer;
+}

@@ -1,6 +1,7 @@
 import { Link, useParams } from "react-router";
 import { useEffect, useState } from "react";
-import { api } from "../services/api";
+import { api } from "../../services/api";
+import "./ApplicationDetail.css";
 
 // Step 1: Convert raw database/API date values into a readable UI format.
 function formatDateDMY(value) {
@@ -87,14 +88,14 @@ export default function ApplicationDetail() {
 
   // Step 6: Render detail screen UI.
   return (
-    <section style={{ padding: "1rem" }}>
+    <section className="application-detail">
       <h2>Application Detail</h2>
 
       {/* Step 6a: Show loading message while data is being fetched. */}
       {loading ? <p>Loading...</p> : null}
 
       {/* Step 6b: Show error message when an error exists. */}
-      {error ? <p style={{ color: "crimson" }}>{error}</p> : null}
+      {error ? <p className="application-detail-error">{error}</p> : null}
 
       {/* Step 6c: Show application fields when data exists. */}
       {application ? (
@@ -108,7 +109,7 @@ export default function ApplicationDetail() {
       ) : null}
 
       {/* Step 6d: Provide edit, back, and delete actions. */}
-      <div style={{ display: "flex", gap: "0.75rem" }}>
+      <div className="application-detail-actions">
         <Link to={`/applications/${id}/edit`}>Edit</Link>
         <Link to="/applications">Back</Link>
         <button onClick={handleDelete}>Delete</button>

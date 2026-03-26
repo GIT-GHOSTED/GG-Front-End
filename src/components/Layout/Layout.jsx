@@ -18,10 +18,11 @@ import {
   LogoutOutlined,
 } from "@ant-design/icons";
 // Import both logo variants and switch based on current theme mode.
-import lightGhost from "../../img/Light-Ghost.png";
-import darkGhost from "../../img/Dark-Ghost.png";
+import lightGhost from "../../../img/Light-Ghost.png";
+import darkGhost from "../../../img/Dark-Ghost.png";
 // Ant styles (quick start). In production you may import theme CSS differently.
 import "antd/dist/antd.css";
+import "./Layout.css";
 
 const { Sider, Content } = AntLayout;
 
@@ -130,7 +131,7 @@ export default function Layout({ token, setToken, themeMode }) {
       key: "logout",
       icon: <LogoutOutlined />,
       label: (
-        <span onClick={handleLogout} style={{ cursor: "pointer" }}>
+        <span onClick={handleLogout} className="layout-logout">
           Logout
         </span>
       ),
@@ -151,32 +152,24 @@ export default function Layout({ token, setToken, themeMode }) {
   */
   return (
     // Root layout fills the viewport.
-    <AntLayout style={{ height: "100vh", overflow: "hidden" }}>
+    <AntLayout className="layout-root">
       {/* Centered logo that sits above the sidebar. left uses calc to stay centered when collapsed or expanded. */}
       <div
+        className="layout-logo-container"
         style={{
-          position: "fixed",
           top: LOGO_TOP,
           left: `calc(${collapsed ? SIDER_COLLAPSED_WIDTH : SIDER_WIDTH}px / 2)`,
-          transform: "translateX(-50%)",
-          zIndex: 1200,
-          pointerEvents: "auto",
           width: LOGO_SIZE,
           height: LOGO_SIZE,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
         }}
       >
-        <Link to="/" style={{ display: "block" }}>
+        <Link to="/" className="layout-logo-link">
           <img
+            className="layout-logo-image"
             src={sidebarLogo}
             alt="logo"
             style={{
               height: LOGO_SIZE,
-              width: "auto",
-              objectFit: "contain",
-              display: "block",
             }}
           />
         </Link>
@@ -184,45 +177,42 @@ export default function Layout({ token, setToken, themeMode }) {
 
       {/* Sidebar (fixed on the left) */}
       <Sider
+        className="layout-sider"
         collapsible
         collapsed={collapsed}
         onCollapse={(val) => setCollapsed(val)}
         width={SIDER_WIDTH}
         collapsedWidth={SIDER_COLLAPSED_WIDTH}
         style={{
-          position: "fixed",
-          left: 0,
-          top: 0,
-          bottom: 0,
-          overflow: "hidden",
           background: sidebarBg,
         }}
       >
         {/* Menu starts just below the logo with reduced padding */}
         <Menu
+          className="layout-menu"
           theme="dark"
           mode="inline"
           selectedKeys={[selectedKey]}
           items={menuItems}
           style={{
-            borderRight: 0,
-            height: "100%",
             paddingTop: menuPaddingTop,
             background: sidebarBg,
           }}
         />
 
         {/* Collapse toggle at the bottom-right of the sider */}
-        <div style={{ position: "absolute", right: 12, bottom: 12 }}>
+        <div className="layout-collapse-toggle">
           {collapsed ? (
             <MenuUnfoldOutlined
+              className="layout-collapse-icon"
               onClick={() => setCollapsed(false)}
-              style={{ fontSize: 18, cursor: "pointer", color: siderIconColor }}
+              style={{ color: siderIconColor }}
             />
           ) : (
             <MenuFoldOutlined
+              className="layout-collapse-icon"
               onClick={() => setCollapsed(true)}
-              style={{ fontSize: 18, cursor: "pointer", color: siderIconColor }}
+              style={{ color: siderIconColor }}
             />
           )}
         </div>
@@ -231,24 +221,16 @@ export default function Layout({ token, setToken, themeMode }) {
       {/* Main area shifted right so it doesn't sit under the sider.
           We removed top margins and reduced padding so content is closer to the top. */}
       <AntLayout
+        className="layout-main"
         style={{
           marginLeft: collapsed ? SIDER_COLLAPSED_WIDTH : SIDER_WIDTH,
-          marginTop: 0,
-          height: "100vh",
-          overflow: "hidden",
-          transition: "margin-left .2s",
         }}
       >
         <Content
+          className="layout-content"
           style={{
-            margin: 16,
-            padding: 24,
             background: antdToken.colorBgContainer,
             color: antdToken.colorText,
-            height: "100%",
-            display: "flex",
-            flexDirection: "column",
-            overflow: "hidden", // prevent scrollbars here
           }}
         >
           <Outlet /> {/* nested route content appears here */}
