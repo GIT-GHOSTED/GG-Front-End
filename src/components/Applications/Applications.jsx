@@ -1,8 +1,9 @@
 import { Link } from "react-router";
 import { useState } from "react";
-import NewApplicationForm from "./NewApplicationForm/NewApplicationForm";
-import { useApplications } from "../context/applicationsContext";
+import NewApplicationForm from "../NewApplicationForm/NewApplicationForm";
+import { useApplications } from "../../context/applicationsContext";
 import { Button } from "antd";
+import "./Applications.css";
 
 export default function Applications() {
   // Step 1: Use context to get applications
@@ -13,7 +14,7 @@ export default function Applications() {
 
   // Step 3: Render the applications list UI
   return (
-    <section style={{ padding: "1rem" }}>
+    <section className="applications">
       <h2>Applications</h2>
 
       {/* Step 3a: Show message if no applications exist */}

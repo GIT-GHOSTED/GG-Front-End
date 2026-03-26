@@ -2,14 +2,14 @@ import { Routes, Route } from "react-router";
 import { useState, useEffect } from "react";
 import { ConfigProvider, Switch, theme as antdTheme } from "antd";
 import { SunOutlined, MoonOutlined } from "@ant-design/icons";
-import Homepage from "./components/Homepage";
-import Register from "./components/Register";
-import LogIn from "./components/LogIn";
+import Homepage from "./components/Homepage/Homepage";
+import Register from "./components/Register/Register";
+import LogIn from "./components/Login/Login";
 import Dashboard from "./components/Dashboard/Dashboard";
-import Applications from "./components/Applications";
-import ApplicationDetail from "./components/ApplicationDetail";
-import EditApplication from "./components/EditApplication";
-import Layout from "./components/Layout";
+import Applications from "./components/Applications/Applications";
+import ApplicationDetail from "./components/ApplicationDetail/ApplicationDetail";
+import EditApplication from "./components/EditApplication/EditApplication";
+import Layout from "./components/Layout/Layout";
 
 export default function App() {
   // Step 1: Initialize auth token state from localStorage so refreshes keep login state.

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import { api } from "../services/api";
+import { api } from "../../services/api";
+import "./Login.css";
 
 export default function LogIn({ setToken }) {
   //Track user input values for login credentials.
@@ -44,11 +45,11 @@ export default function LogIn({ setToken }) {
 
   //Render login page UI.
   return (
-    <section style={{ padding: "1rem" }}>
+    <section className="login">
       <h2>Log In</h2>
 
       {/* Show error text when an error exists. */}
-      {error ? <p style={{ color: "crimson" }}>{error}</p> : null}
+      {error ? <p className="login-error">{error}</p> : null}
 
       {/* Render controlled login form bound to component state. */}
       <form onSubmit={handleSubmit}>

@@ -1,0 +1,7 @@
+.register {
+  padding: 1rem;
+}
+
+.register-error {
+  color: crimson;
+}

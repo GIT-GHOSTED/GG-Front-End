@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
-import { api } from "../services/api";
+import { api } from "../../services/api";
+import "./EditApplication.css";
 
 // Step 1: Normalize incoming date values to the YYYY-MM-DD format required by input[type="date"].
 function toDateInputValue(value) {
@@ -129,14 +130,14 @@ export default function EditApplication() {
 
   // Step 11: Render the edit form UI.
   return (
-    <section style={{ padding: "1rem" }}>
+    <section className="edit-application">
       <h2>Edit Application #{id}</h2>
 
       {/* Step 11a: Show loading message while initial data is being fetched. */}
       {loading ? <p>Loading...</p> : null}
 
       {/* Step 11b: Show error message when one exists. */}
-      {error ? <p style={{ color: "crimson" }}>{error}</p> : null}
+      {error ? <p className="edit-application-error">{error}</p> : null}
 
       {/* Step 11c: Controlled form bound to formData state and submit handler. */}
       <form onSubmit={handleSubmit}>

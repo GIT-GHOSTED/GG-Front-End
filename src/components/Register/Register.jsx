@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import { api } from "../services/api";
+import { api } from "../../services/api";
+import "./Register.css";
 
 export default function Register({ setToken }) {
   // Track user input values for registration credentials.
@@ -44,12 +45,12 @@ export default function Register({ setToken }) {
 
   // Render registration page UI.
   return (
-    <section style={{ padding: "1rem" }}>
+    <section className="register">
       {/* Show registration page heading. */}
       <h2>Register</h2>
 
       {/* Show error text when an error exists. */}
-      {error ? <p style={{ color: "crimson" }}>{error}</p> : null}
+      {error ? <p className="register-error">{error}</p> : null}
 
       {/* Render controlled registration form. */}
       <form onSubmit={handleSubmit}>
