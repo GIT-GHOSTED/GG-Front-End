@@ -1,10 +1,21 @@
 import { Link } from "react-router";
+import lightGhost from "../../../img/Light-Ghost.png";
+import darkGhost from "../../../img/Dark-Ghost.png";
 import "./Homepage.css";
 
-export default function Homepage() {
+export default function Homepage({ themeMode }) {
   // Step 1: Render the homepage container.
   return (
     <section className="homepage">
+      {/* Step 1a: Display large theme-aware logo at top. */}
+      <div className="homepage-logo-container">
+        <img
+          className="homepage-logo"
+          src={themeMode === "dark" ? darkGhost : lightGhost}
+          alt="Git Ghosted logo"
+        />
+      </div>
+
       {/* Step 2: Show the primary app welcome message. */}
       <h1>Welcome to Git Ghosted</h1>
 

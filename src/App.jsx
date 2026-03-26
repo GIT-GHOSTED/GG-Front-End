@@ -69,13 +69,19 @@ export default function App() {
       <main>
         <Routes>
           {/* Step 3: Public route for landing page. */}
-          <Route path="/" element={<Homepage />} />
+          <Route path="/" element={<Homepage themeMode={themeMode} />} />
 
           {/* Step 4: Public route for user registration (needs setToken on success). */}
-          <Route path="/register" element={<Register setToken={setToken} />} />
+          <Route
+            path="/register"
+            element={<Register setToken={setToken} themeMode={themeMode} />}
+          />
 
           {/* Step 5: Public route for user login (needs setToken on success). */}
-          <Route path="/login" element={<LogIn setToken={setToken} />} />
+          <Route
+            path="/login"
+            element={<LogIn setToken={setToken} themeMode={themeMode} />}
+          />
 
           {/* Step 6: Protected route group guarded by Layout token check. */}
           <Route
