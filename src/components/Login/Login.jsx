@@ -1,9 +1,11 @@
 import { useState } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate, Link } from "react-router";
 import { api } from "../../services/api";
+import lightGhost from "../../../img/Light-Ghost.png";
+import darkGhost from "../../../img/Dark-Ghost.png";
 import "./Login.css";
 
-export default function LogIn({ setToken }) {
+export default function LogIn({ setToken, themeMode }) {
   //Track user input values for login credentials.
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -46,6 +48,15 @@ export default function LogIn({ setToken }) {
   //Render login page UI.
   return (
     <section className="login">
+      {/* Logo button that navigates back to home page - switches between light/dark mode */}
+      <Link to="/" className="login-logo-link">
+        <img
+          className="login-logo"
+          src={themeMode === "dark" ? darkGhost : lightGhost}
+          alt="GG logo"
+        />
+      </Link>
+      
       <h2>Log In</h2>
 
       {/* Show error text when an error exists. */}

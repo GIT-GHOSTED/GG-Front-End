@@ -1,9 +1,11 @@
 import { useState } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate, Link } from "react-router";
 import { api } from "../../services/api";
+import lightGhost from "../../../img/Light-Ghost.png";
+import darkGhost from "../../../img/Dark-Ghost.png";
 import "./Register.css";
 
-export default function Register({ setToken }) {
+export default function Register({ setToken, themeMode }) {
   // Track user input values for registration credentials.
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -46,6 +48,15 @@ export default function Register({ setToken }) {
   // Render registration page UI.
   return (
     <section className="register">
+      {/* Logo button that navigates back to home page - switches between light/dark mode */}
+      <Link to="/" className="register-logo-link">
+        <img
+          className="register-logo"
+          src={themeMode === "dark" ? darkGhost : lightGhost}
+          alt="GG logo"
+        />
+      </Link>
+
       {/* Show registration page heading. */}
       <h2>Register</h2>
 
