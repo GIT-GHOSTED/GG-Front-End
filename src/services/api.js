@@ -3,7 +3,10 @@ const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 async function request(path, options = {}) {
   const { headers: customHeaders = {}, ...restOptions } = options;
 
-  const response = await fetch(`${API_BASE_URL}${path}`, {
+  // Normalize URL by removing duplicate slashes
+  const url = `${API_BASE_URL}${path}`.replace(/([^:]\/)\/+/g, "$1");
+
+  const response = await fetch(url, {
     ...restOptions,
     headers: {
       "Content-Type": "application/json",
