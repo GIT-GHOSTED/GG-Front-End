@@ -2,10 +2,13 @@ import { useState } from "react";
 import "./NewApplicationForm.css";
 import { useApplications } from "../../context/applicationsContext";
 
-//* Component renders a form that allows user to create and submit
-//* a new job application
+/**
+ * New application form modal.
+ *
+ * @param {{showForm: boolean, setShowForm: Function}} props
+ * @returns {JSX.Element}
+ */
 export default function NewApplicationForm({ showForm, setShowForm }) {
-  //* useState object stores all form input values for a new application
   const [formData, setFormData] = useState({
     company: "",
     role: "",
@@ -18,17 +21,15 @@ export default function NewApplicationForm({ showForm, setShowForm }) {
     followUpDate: "",
   });
 
-  //* Retrieve API base URL from environment variables
   const API = import.meta.env.VITE_API_URL;
-
-  //* Retrieve stored authentication token for authorized requests
   const token = localStorage.getItem("token");
-
-  //* Function from context used to refresh applications after new
-  //* one is added
   const { loadApplications } = useApplications();
 
-  //* Handles input changes by updating corresponding field in formData state
+  /**
+   * Update form state on changes.
+   *
+   * @param {React.ChangeEvent<HTMLInputElement|HTMLSelectElement>} event
+   */
   const handleChange = (event) => {
     setFormData({
       ...formData,
@@ -36,7 +37,11 @@ export default function NewApplicationForm({ showForm, setShowForm }) {
     });
   };
 
-  //* Handles form submission; sends POST request to create new application
+  /**
+   * Submit new application form and persist to API.
+   *
+   * @param {React.FormEvent<HTMLFormElement>} event
+   */
   const createNewApp = async (event) => {
     event.preventDefault();
 
@@ -44,11 +49,9 @@ export default function NewApplicationForm({ showForm, setShowForm }) {
       const res = await fetch(`${API}/applications`, {
         method: "POST",
         headers: {
-          //* Specifies JSON data format and includes authorization token
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        //* Converts formData object into JSON string for request body
         body: JSON.stringify(formData),
       });
 
@@ -102,8 +105,8 @@ export default function NewApplicationForm({ showForm, setShowForm }) {
               {/* //* Gives all these status options for dropdown menu*/}
               <option value={""}>Select Status</option>
               <option value={"applied"}>Applied</option>
-              <option value={"interview"}>Interview</option>
-              <option value={"offer"}>Offer</option>
+              <option value={"interview"}>Interviewed</option>
+              <option value={"offer"}>Offered</option>
               <option value={"rejected"}>Rejected</option>
               <option value={"ghosted"}>Ghosted</option>
             </select>

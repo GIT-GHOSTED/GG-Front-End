@@ -26,8 +26,8 @@
 
 /* Grid Layout */
 .applications-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 1.5rem;
   margin-bottom: 2rem;
 }
@@ -54,7 +54,7 @@
 [data-theme="dark"] .application-card {
   background-color: #141414;
   border: 1px solid #434343;
-  color: #rgba(255, 255, 255, 0.85);
+  color: rgba(255, 255, 255, 0.85);
 }
 
 .application-card:hover {
@@ -91,22 +91,22 @@
 }
 
 .status-applied {
-  background-color: #ffd591;
+  background-color: #0d74e7;
   color: #8b6914;
 }
 
 .status-interview {
-  background-color: #95de64;
+  background-color: #ffc658;
   color: #274916;
 }
 
 .status-offer {
-  background-color: #85e8e8;
+  background-color: #82ca9d;
   color: #164b35;
 }
 
 .status-rejected {
-  background-color: #ff7875;
+  background-color: #ff6b6b;
   color: #5c0206;
 }
 

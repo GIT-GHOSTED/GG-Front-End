@@ -24,7 +24,7 @@ A modern React-based frontend application for tracking job applications. Built w
 ### Prerequisites
 
 - Node.js (version 22 or higher)
-- npm or yarn
+- npm
 
 ### Installation
 
