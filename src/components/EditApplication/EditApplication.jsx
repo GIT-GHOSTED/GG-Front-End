@@ -107,12 +107,15 @@ export default function EditApplication() {
     setSaving(true);
 
     try {
-      // Step 10e: Send full update payload; convert empty date string to null.
+      // Step 10e: Send full update payload; map date_applied → dateApplied to match backend expectation.
       await api.updateApplication(
         id,
         {
-          ...formData,
-          date_applied: formData.date_applied || null,
+          company: formData.company,
+          role: formData.role,
+          status: formData.status,
+          dateApplied: formData.date_applied || null,
+          notes: formData.notes,
         },
         token,
       );
