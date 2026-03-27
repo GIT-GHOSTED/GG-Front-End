@@ -105,8 +105,8 @@ export default function NewApplicationForm({ showForm, setShowForm }) {
               {/* //* Gives all these status options for dropdown menu*/}
               <option value={""}>Select Status</option>
               <option value={"applied"}>Applied</option>
-              <option value={"interview"}>Interviewed</option>
-              <option value={"offer"}>Offered</option>
+              <option value={"interviewed"}>Interviewed</option>
+              <option value={"offered"}>Offered</option>
               <option value={"rejected"}>Rejected</option>
               <option value={"ghosted"}>Ghosted</option>
             </select>

@@ -79,7 +79,7 @@
 
 /* //* Styles submit button to highlight primary action */
 .formActions button[type="submit"] {
-  background-color: rgb(38, 71, 191);
+  background-color: #1677ff;
   color: white;
 }
 

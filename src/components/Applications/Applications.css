@@ -92,15 +92,15 @@
 
 .status-applied {
   background-color: #0d74e7;
-  color: #8b6914;
+  color: white;
 }
 
-.status-interview {
+.status-interviewed {
   background-color: #ffc658;
   color: #274916;
 }
 
-.status-offer {
+.status-offered {
   background-color: #82ca9d;
   color: #164b35;
 }

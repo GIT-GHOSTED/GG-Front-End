@@ -21,12 +21,12 @@ export default function Dashboard() {
 
   //* Counts all application that contain status word "interview"
   const interviewCount = applications.filter(
-    (currApp) => currApp.status === "interview",
+    (currApp) => currApp.status === "interviewed",
   ).length;
 
   //* Counts all application that contain status word "offered"
   const offerCount = applications.filter(
-    (currApp) => currApp.status === "offer",
+    (currApp) => currApp.status === "offered",
   ).length;
 
   //* Counts all application that contain status word "rejected"
