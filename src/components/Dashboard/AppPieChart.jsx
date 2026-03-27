@@ -6,10 +6,12 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
+import { theme as antdTheme } from "antd";
 
 export default function AppPieChart({ statusData }) {
   //* Selection of colors used for the Pie Chart
   const COLORS = ["#0d74e7", "#ffc658", "#82ca9d", "#ff6b6b", "#2b2a2a"];
+  const { token: antdToken } = antdTheme.useToken();
 
   return (
     <section className="chartWrapper">

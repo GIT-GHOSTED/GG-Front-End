@@ -3,8 +3,7 @@ import { useState } from "react";
 import { useApplications } from "../../context/applicationsContext";
 import FollowUps from "../FollowUps/FollowUps";
 import FollowUpToggle from "../FollowUps/FollowUpToggle";
-import { theme as antdTheme } from "antd";
-import AreaChart from "./AreaChart";
+import AppAreaChart from "./AppAreaChart/AppAreaChart";
 import AppPieChart from "./AppPieChart";
 
 export default function Dashboard() {
@@ -14,7 +13,6 @@ export default function Dashboard() {
   //   Purpose: Use dynamic colors (colorText, colorBgElevated) that respond to theme mode
   //   Instead of hardcoding colors, we pull from Ant Design's theme to stay in sync
   //   Result: Chart tooltip and legend colors match the current light/dark theme
-  const { token: antdToken } = antdTheme.useToken();
 
   //* Counts all application that contain status word "applied"
   const appliedCount = applications.filter(
@@ -80,6 +78,15 @@ export default function Dashboard() {
           <AppPieChart statusData={statusData} />
         </section>
 
+        {/* Recent Applications Section  */}
+        <section className="recentApps">
+          <h3>Recent Activity</h3>
+          <ul>
+            {/* //* Component renders list of 4 most recent applications completed */}
+            <RecentActivity recentApps={recentApps} />
+          </ul>
+        </section>
+
         {/* Follow-ups Section*/}
         <section className="followUpSection">
           <section className="followUpToggle">
@@ -100,13 +107,10 @@ export default function Dashboard() {
         </section>
       </section>
 
-      {/* Recent Applications Section  */}
-      <section className="recentApps">
-        <h3>Recent Activity</h3>
-        <ul>
-          {/* //* Component renders list of 4 most recent applications completed */}
-          <RecentActivity recentApps={recentApps} />
-        </ul>
+      {/*AREA CHART SECTION  */}
+      <section>
+        <h3>Applications Over Time</h3>
+        <AppAreaChart applications={applications} />
       </section>
     </section>
   );
