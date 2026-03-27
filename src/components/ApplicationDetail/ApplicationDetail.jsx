@@ -89,7 +89,16 @@ export default function ApplicationDetail() {
   // Step 6: Render detail screen UI.
   return (
     <section className="application-detail">
-      <h2>Application Detail</h2>
+      <div className="application-detail-header">
+        <h2>Application Detail</h2>
+        {/* Step 6d: Provide edit and delete actions. */}
+        <div className="application-detail-actions">
+          <Link to={`/applications/${id}/edit`}>Edit</Link>
+          <button className="delete-button" onClick={handleDelete}>
+            Delete
+          </button>
+        </div>
+      </div>
 
       {/* Step 6a: Show loading message while data is being fetched. */}
       {loading ? <p>Loading...</p> : null}
@@ -100,20 +109,42 @@ export default function ApplicationDetail() {
       {/* Step 6c: Show application fields when data exists. */}
       {application ? (
         <>
-          <p>Company: {application.company}</p>
-          <p>Role: {application.role}</p>
-          <p>Status: {application.status}</p>
-          <p>Date applied: {formatDateDMY(application.date_applied)}</p>
-          <p>Notes: {application.notes || "-"}</p>
+          <div className="application-detail-content">
+            <div className="application-info-block">
+              <div className="info-grid">
+                <div className="info-field">
+                  <label>Company</label>
+                  <span>{application.company}</span>
+                </div>
+                <div className="info-field">
+                  <label>Role</label>
+                  <span>{application.role}</span>
+                </div>
+                <div className="info-field">
+                  <label>Status</label>
+                  <span>{application.status}</span>
+                </div>
+                <div className="info-field">
+                  <label>Date Applied</label>
+                  <span>{formatDateDMY(application.date_applied)}</span>
+                </div>
+              </div>
+            </div>
+            <div className="notes-section">
+              <label>Notes</label>
+              <div className="notes-content">
+                {application.notes || "No notes available."}
+              </div>
+            </div>
+          </div>
+          {/* Back button at bottom */}
+          <div className="back-button-container">
+            <Link to="/applications" className="back-button">
+              Back
+            </Link>
+          </div>
         </>
       ) : null}
-
-      {/* Step 6d: Provide edit, back, and delete actions. */}
-      <div className="application-detail-actions">
-        <Link to={`/applications/${id}/edit`}>Edit</Link>
-        <Link to="/applications">Back</Link>
-        <button onClick={handleDelete}>Delete</button>
-      </div>
     </section>
   );
 }

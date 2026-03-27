@@ -1,109 +1,97 @@
-# 📋 Git-Ghosted
+# GG-Front-End
 
-A full stack web application that helps job seekers organize and manage their job search. Track applications, monitor statuses, log interviews, and visualize your progress — all in one place.
-
----
-
-## 🗂️ Table of Contents
-
-- [Project Overview](#project-overview)
-- [Features](#features)
-- [Tech Stack](#tech-stack)
-- [Architecture](#architecture)
-- [Database Schema](#database-schema)
-- [API Endpoints](#api-endpoints)
-- [Frontend Pages & Components](#frontend-pages--components)
-- [Getting Started](#getting-started)
-- [Project Roadmap](#project-roadmap)
-- [Stretch Goals](#stretch-goals)
-
----
-
-## Project Overview
-
-The Job Application Tracker is a personal CRM (Customer Relationship Management) tool designed specifically for job seekers. Users can create an account, log job applications, track their status through the hiring pipeline, and gain insight into their job search through a visual dashboard.
-
-**Target User:** Anyone actively job hunting who wants a better system than spreadsheets or sticky notes.
-
----
+A modern React-based frontend application for tracking job applications. Built with Vite, this app provides an intuitive interface for job seekers to manage their application process, visualize progress, and stay organized.
 
 ## Features
 
-- **User Authentication** — Secure sign-up, login, and logout with hashed passwords and JWT sessions
-- **Application Management** — Create, view, edit, and delete job applications
-- **Status Tracking** — Track each application through stages: `Saved → Applied → Phone Screen → Interview → Offer → Rejected`
-- **Notes & Contacts** — Add notes and recruiter/contact info to each application
-- **Dashboard** — Visual summary of application statuses and activity over time
-- **Search & Filter** — Filter applications by status, company, or date applied
-
----
+- **User Authentication**: Login and registration forms for secure access
+- **Application Management**: Create, view, edit, and track job applications
+- **Dashboard**: Visual charts and summaries of application statuses and progress
+- **Follow-ups**: Track and manage follow-up actions on applications
+- **Responsive Design**: Built with Ant Design for a clean, mobile-friendly UI
 
 ## Tech Stack
 
-| Layer     | Technology                       |
-| --------- | -------------------------------- |
-| Frontend  | React (with React Router, Axios) |
-| Backend   | Node.js, Express.js              |
-| Database  | PostgreSQL                       |
-| Auth      | JSON Web Tokens (JWT), bcrypt    |
-| Styling   | CSS Modules or Tailwind CSS      |
-| Dev Tools | Nodemon, dotenv, pgAdmin         |
+- **React**: Frontend framework
+- **Vite**: Build tool and development server
+- **React Router**: Client-side routing
+- **Ant Design**: UI component library
+- **Recharts**: Data visualization library
+- **Axios**: HTTP client for API calls (assumed in services/api.js)
 
----
+## Getting Started
 
-```sql
--- Users table
-CREATE TABLE users (
-  id          SERIAL PRIMARY KEY,
-  email       VARCHAR(255) UNIQUE NOT NULL,
-  password    VARCHAR(255) NOT NULL,
-  name        VARCHAR(100),
-  created_at  TIMESTAMP DEFAULT NOW()
-);
+### Prerequisites
 
--- Applications table
-CREATE TABLE applications (
-  id            SERIAL PRIMARY KEY,
-  user_id       INTEGER REFERENCES users(id) ON DELETE CASCADE,
-  company       VARCHAR(255) NOT NULL,
-  role          VARCHAR(255) NOT NULL,
-  status        VARCHAR(50) DEFAULT 'Saved',
-  job_url       TEXT,
-  date_applied  DATE,
-  notes         TEXT,
-  contact_name  VARCHAR(100),
-  contact_email VARCHAR(255),
-  created_at    TIMESTAMP DEFAULT NOW(),
-  updated_at    TIMESTAMP DEFAULT NOW()
-);
+- Node.js (version 22 or higher)
+- npm or yarn
+
+### Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/GIT-GHOSTED/GG-Front-End.git
+   cd GG-Front-End
+   ```
+
+2. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+3. Start the development server:
+
+   ```bash
+   npm run dev
+   ```
+
+4. Open your browser and navigate to `http://localhost:5173`
+
+### Build for Production
+
+```bash
+npm run build
 ```
 
-**Status values (enforced in application logic):**
-`Saved`, `Applied`, `Phone Screen`, `Interview`, `Offer`, `Rejected`
+### Preview Production Build
 
----
+```bash
+npm run preview
+```
 
-## API Endpoints
+## Project Structure
 
-### Auth Routes — `/api/auth`
+```
+src/
+├── components/
+│   ├── ApplicationDetail/
+│   ├── Applications/
+│   ├── Dashboard/
+│   ├── EditApplication/
+│   ├── FollowUps/
+│   ├── Homepage/
+│   ├── Layout/
+│   ├── Login/
+│   ├── NewApplicationForm/
+│   └── Register/
+├── context/
+│   └── applicationsContext.jsx
+├── services/
+│   └── api.js
+├── App.jsx
+├── main.jsx
+└── index.css
+```
 
-| Method | Endpoint             | Description                | Auth Required |
-| ------ | -------------------- | -------------------------- | ------------- |
-| POST   | `/api/auth/register` | Register a new user        | No            |
-| POST   | `/api/auth/login`    | Login and receive JWT      | No            |
-| GET    | `/api/auth/me`       | Get current logged-in user | Yes           |
+## Contributing
 
-### Application Routes — `/api/applications`
-
-| Method | Endpoint                | Description                                 | Auth Required |
-| ------ | ----------------------- | ------------------------------------------- | ------------- |
-| GET    | `/api/applications`     | Get all applications for the logged-in user | Yes           |
-| GET    | `/api/applications/:id` | Get a single application by ID              | Yes           |
-| POST   | `/api/applications`     | Create a new application                    | Yes           |
-| PUT    | `/api/applications/:id` | Update an existing application              | Yes           |
-| DELETE | `/api/applications/:id` | Delete an application                       | Yes           |
-
----
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Run linting: `npm run lint`
+5. Submit a pull request
 
 ## Frontend Pages & Components
 
@@ -120,7 +108,7 @@ CREATE TABLE applications (
 
 ### Key Components
 
-- `Navbar` — Navigation bar with logout button
+- `Sidebar` — Navigation bar with logout button
 - `ApplicationCard` — Summary card used in the list view
 - `ApplicationForm` — Shared form for create and edit
 - `StatusBadge` — Color-coded badge showing current status
@@ -134,7 +122,7 @@ CREATE TABLE applications (
 
 ### Prerequisites
 
-- Node.js (v18+)
+- Node.js (v22+)
 - PostgreSQL (v14+)
 - npm
 
@@ -170,48 +158,10 @@ The app will be available at `http://localhost:3000`, with the API running on `h
 
 ---
 
-## Project Roadmap
-
-### Phase 1 — Foundation
-
-- [ ] Set up project structure and repositories
-- [ ] Initialize Express server with PostgreSQL connection
-- [ ] Create database schema and run migrations
-- [ ] Implement user registration and login (JWT auth)
-- [ ] Build auth-protected API routes for applications (full CRUD)
-
-### Phase 2 — Frontend Core
-
-- [ ] Set up React app with React Router
-- [ ] Build Login and Register pages
-- [ ] Implement auth context for global user state
-- [ ] Build Applications list page with cards
-- [ ] Build Application create/edit form
-- [ ] Build Application detail page
-
-### Phase 3 — Polish & Dashboard
-
-- [ ] Build Dashboard page with status summary counts
-- [ ] Add status pipeline / progress visualization
-- [ ] Add search and filter functionality
-- [ ] Add form validation and user-friendly error messages
-- [ ] Responsive design / mobile-friendly layout
-
-### Phase 4 — Testing & Deployment
-
-- [ ] Manual end-to-end testing of all features
-- [ ] Deploy backend to Render or Railway
-- [ ] Deploy frontend to Netlify or Vercel
-- [ ] Connect production frontend to production API
-- [ ] Write final README with live demo link
-
----
-
 ## Stretch Goals
 
 These are features to add if time permits:
 
-- **Follow-up Reminders** — Set a reminder date per application and show overdue items
+- **Search bar/ Filter**- Add a search bar to applications and filter the applications page
 - **Timeline / Activity Log** — Log every status change with a timestamp
-- **Export to CSV** — Download your applications as a spreadsheet
 - **Dark Mode** — Theme toggle for the UI
