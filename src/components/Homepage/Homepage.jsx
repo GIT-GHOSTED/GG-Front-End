@@ -1,9 +1,12 @@
-import { Link } from "react-router";
+import { useNavigate } from "react-router";
+import { Button } from "antd";
 import lightGhost from "../../../img/Light-Ghost.png";
 import darkGhost from "../../../img/Dark-Ghost.png";
 import "./Homepage.css";
 
 export default function Homepage({ themeMode }) {
+  const navigate = useNavigate();
+
   // Step 1: Render the homepage container.
   return (
     <section className="homepage">
@@ -22,13 +25,17 @@ export default function Homepage({ themeMode }) {
       {/* Step 3: Show supporting tagline describing app purpose. */}
       <h2>Track your job applications and never Git Ghosted again!</h2>
 
-      {/* Step 4: Render quick navigation links for new and returning users. */}
+      {/* Step 4: Render quick navigation buttons for new and returning users. */}
       <div className="homepage-links">
         {/* Step 4a: Navigate new users to registration flow. */}
-        <Link to="/register">Get Started</Link>
+        <Button type="primary" onClick={() => navigate("/register")}>
+          Get Started
+        </Button>
 
         {/* Step 4b: Navigate existing users to login flow. */}
-        <Link to="/login">Sign In</Link>
+        <Button type="primary" onClick={() => navigate("/login")}>
+          Sign In
+        </Button>
       </div>
     </section>
   );
