@@ -1,12 +1,200 @@
 .application-detail {
   padding: 1rem;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
-.application-detail-error {
-  color: crimson;
+.application-detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.application-detail-header h2 {
+  margin: 0;
+  margin-right: auto;
 }
 
 .application-detail-actions {
   display: flex;
   gap: 0.75rem;
+  margin-left: 2rem;
+}
+
+.application-detail-actions a,
+.application-detail-actions button {
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+body[data-theme="light"] .application-detail-actions a,
+body[data-theme="light"] .application-detail-actions button {
+  background-color: #1890ff;
+  color: white;
+}
+
+body[data-theme="light"] .application-detail-actions a:hover,
+body[data-theme="light"] .application-detail-actions button:hover {
+  background-color: #40a9ff;
+}
+
+body[data-theme="dark"] .application-detail-actions a,
+body[data-theme="dark"] .application-detail-actions button {
+  background-color: #1890ff;
+  color: white;
+}
+
+body[data-theme="dark"] .application-detail-actions a:hover,
+body[data-theme="dark"] .application-detail-actions button:hover {
+  background-color: #40a9ff;
+}
+
+.delete-button {
+  background-color: #ff4d4f !important;
+}
+
+body[data-theme="light"] .delete-button:hover {
+  background-color: #ff7875 !important;
+}
+
+body[data-theme="dark"] .delete-button:hover {
+  background-color: #ff7875 !important;
+}
+
+.back-button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.back-button {
+  padding: 0.75rem 1.5rem;
+  text-decoration: none;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+body[data-theme="light"] .back-button {
+  background-color: #1890ff;
+  color: white;
+}
+
+body[data-theme="light"] .back-button:hover {
+  background-color: #40a9ff;
+}
+
+body[data-theme="dark"] .back-button {
+  background-color: #1890ff;
+  color: white;
+}
+
+body[data-theme="dark"] .back-button:hover {
+  background-color: #40a9ff;
+}
+
+.application-detail-error {
+  color: crimson;
+  margin-bottom: 1rem;
+}
+
+.application-detail-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.application-info-block {
+  background-color: var(--card-bg, rgba(255, 255, 255, 0.1));
+  border: 1px solid var(--border-color, rgba(255, 255, 255, 0.2));
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+body[data-theme="light"] .application-info-block {
+  --card-bg: #ffffff;
+  --border-color: #d9d9d9;
+}
+
+body[data-theme="dark"] .application-info-block {
+  --card-bg: #1f1f1f;
+  --border-color: #434343;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.info-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.info-field label {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: var(--label-color, #666);
+}
+
+body[data-theme="light"] .info-field label {
+  --label-color: #666;
+}
+
+body[data-theme="dark"] .info-field label {
+  --label-color: #ccc;
+}
+
+.info-field span {
+  font-size: 1.1rem;
+  color: var(--text-color, inherit);
+}
+
+.notes-section {
+  background-color: var(--card-bg, rgba(255, 255, 255, 0.1));
+  border: 1px solid var(--border-color, rgba(255, 255, 255, 0.2));
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+body[data-theme="light"] .notes-section {
+  --card-bg: #ffffff;
+  --border-color: #d9d9d9;
+}
+
+body[data-theme="dark"] .notes-section {
+  --card-bg: #1f1f1f;
+  --border-color: #434343;
+}
+
+.notes-section label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: var(--label-color, #666);
+}
+
+body[data-theme="light"] .notes-section label {
+  --label-color: #666;
+}
+
+body[data-theme="dark"] .notes-section label {
+  --label-color: #ccc;
+}
+
+.notes-content {
+  color: var(--text-color, inherit);
+  line-height: 1.5;
+  white-space: pre-wrap;
 }

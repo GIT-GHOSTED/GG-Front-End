@@ -1,3 +1,199 @@
 .applications {
-  padding: 1rem;
+  padding: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.applications-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.applications-header h2 {
+  margin: 0;
+  font-size: 1.875rem;
+  font-weight: 600;
+}
+
+.no-applications {
+  text-align: center;
+  padding: 3rem;
+  font-size: 1rem;
+  opacity: 0.6;
+}
+
+/* Grid Layout */
+.applications-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+/* Application Card */
+.application-card {
+  border-radius: 8px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+/* Light theme card styling */
+[data-theme="light"] .application-card {
+  background-color: #ffffff;
+  border: 1px solid #f0f0f0;
+  color: #262626;
+}
+
+/* Dark theme card styling */
+[data-theme="dark"] .application-card {
+  background-color: #141414;
+  border: 1px solid #434343;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.application-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+/* Card Header (Company + Status) */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+  gap: 1rem;
+}
+
+.company-name {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  flex: 1;
+  word-break: break-word;
+}
+
+/* Status Badge */
+.status-badge {
+  display: inline-block;
+  padding: 0.375rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  white-space: nowrap;
+}
+
+.status-applied {
+  background-color: #0d74e7;
+  color: white;
+}
+
+.status-interviewed {
+  background-color: #ffc658;
+  color: #274916;
+}
+
+.status-offered {
+  background-color: #82ca9d;
+  color: #164b35;
+}
+
+.status-rejected {
+  background-color: #ff6b6b;
+  color: #5c0206;
+}
+
+/* Card Body (Role + Date) */
+.card-body {
+  flex: 1;
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  opacity: 0.7;
+}
+
+.value {
+  font-size: 1rem;
+  font-weight: 500;
+  word-break: break-word;
+}
+
+/* Card Footer (View Details Button) */
+.card-footer {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.card-footer a {
+  flex: 1;
+  text-decoration: none;
+}
+
+.card-footer .ant-btn {
+  width: 100%;
+  border-radius: 4px;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .applications-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .applications {
+    padding: 1rem;
+  }
+
+  .applications-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .applications-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .applications-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .applications {
+    padding: 0.75rem;
+  }
+
+  .applications-header h2 {
+    font-size: 1.25rem;
+  }
+
+  .card-header {
+    flex-direction: column;
+  }
+
+  .company-name {
+    font-size: 1.125rem;
+  }
 }

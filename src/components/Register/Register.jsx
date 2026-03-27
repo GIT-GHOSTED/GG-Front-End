@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router";
 import { api } from "../../services/api";
-import lightGhost from "../../../img/Light-Ghost.png";
-import darkGhost from "../../../img/Dark-Ghost.png";
+
+const lightGhost = "/Light-Ghost.png";
+const darkGhost = "/Dark-Ghost.png";
 import "./Register.css";
 
 export default function Register({ setToken, themeMode }) {

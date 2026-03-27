@@ -79,7 +79,7 @@
 
 /* //* Styles submit button to highlight primary action */
 .formActions button[type="submit"] {
-  background-color: #6366f1;
+  background-color: #1677ff;
   color: white;
 }
 
@@ -109,9 +109,13 @@ body[data-theme="dark"] .formGrid input {
   border: 1px solid #434343;
 }
 
-/* Dark mode: Cancel button
+/*  Edit application form styles */
+.edit-application {
+  padding: 1rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
 
-body[data-theme="dark"] .formActions button[type="button"] {
-  background-color: #303030;
-  color: #f5f5f5;
+.edit-application-error {
+  color: crimson;
 }

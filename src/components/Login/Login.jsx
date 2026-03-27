@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router";
 import { api } from "../../services/api";
-import lightGhost from "../../../img/Light-Ghost.png";
-import darkGhost from "../../../img/Dark-Ghost.png";
+
+const lightGhost = "/Light-Ghost.png";
+const darkGhost = "/Dark-Ghost.png";
 import "./Login.css";
 
 export default function LogIn({ setToken, themeMode }) {
@@ -56,7 +57,7 @@ export default function LogIn({ setToken, themeMode }) {
           alt="GG logo"
         />
       </Link>
-      
+
       <h2>Log In</h2>
 
       {/* Show error text when an error exists. */}

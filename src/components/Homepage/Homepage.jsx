@@ -1,7 +1,8 @@
 import { useNavigate } from "react-router";
 import { Button } from "antd";
-import lightGhost from "../../../img/Light-Ghost.png";
-import darkGhost from "../../../img/Dark-Ghost.png";
+
+const lightGhost = "/Light-Ghost.png";
+const darkGhost = "/Dark-Ghost.png";
 import "./Homepage.css";
 
 export default function Homepage({ themeMode }) {

@@ -18,8 +18,8 @@ import {
   LogoutOutlined,
 } from "@ant-design/icons";
 // Import both logo variants and switch based on current theme mode.
-import lightGhost from "../../../img/Light-Ghost.png";
-import darkGhost from "../../../img/Dark-Ghost.png";
+const lightGhost = "/Light-Ghost.png";
+const darkGhost = "/Dark-Ghost.png";
 // Ant styles (quick start). In production you may import theme CSS differently.
 import "antd/dist/antd.css";
 import "./Layout.css";
