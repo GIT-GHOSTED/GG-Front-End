@@ -8,6 +8,7 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
+import { theme as antdTheme } from "antd";
 
 /**
  * Groups applications by month and counts how many applications per month.
@@ -45,6 +46,8 @@ function groupApplicationsByMonth(applications) {
  */
 export default function AppAreaChart({ applications }) {
   const data = groupApplicationsByMonth(applications);
+  // Pull theme-aware colors from Ant Design so the chart matches light/dark mode.
+  const { token: antdToken } = antdTheme.useToken();
 
   return (
     <section className="app-area-chart-section">
@@ -57,19 +60,42 @@ export default function AppAreaChart({ applications }) {
         >
           <defs>
             <linearGradient id="colorApps" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
-              <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
+              <stop
+                offset="5%"
+                stopColor={antdToken.colorPrimary}
+                stopOpacity={0.8}
+              />
+              <stop
+                offset="95%"
+                stopColor={antdToken.colorPrimary}
+                stopOpacity={0}
+              />
             </linearGradient>
           </defs>
 
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="month" />
-          <YAxis />
-          <Tooltip />
+          {/* Grid lines match the theme's border color */}
+          <CartesianGrid
+            strokeDasharray="3 3"
+            stroke={antdToken.colorBorderSecondary}
+          />
+
+          {/* Axis tick labels match the theme's text color */}
+          <XAxis dataKey="month" tick={{ fill: antdToken.colorText }} />
+          <YAxis tick={{ fill: antdToken.colorText }} />
+
+          {/* Tooltip background and text use elevated surface + text tokens */}
+          <Tooltip
+            contentStyle={{
+              backgroundColor: antdToken.colorBgElevated,
+              border: `1px solid ${antdToken.colorBorder}`,
+              color: antdToken.colorText,
+              borderRadius: antdToken.borderRadius,
+            }}
+          />
           <Area
             type="monotone"
             dataKey="total"
-            stroke="#8884d8"
+            stroke={antdToken.colorPrimary}
             fill="url(#colorApps)"
           />
         </AreaChart>
