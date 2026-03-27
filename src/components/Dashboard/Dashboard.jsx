@@ -56,62 +56,63 @@ export default function Dashboard() {
   const recentApps = applications.slice(0, 4);
 
   return (
-    <section className="topSection">
+    <>
       <h2>Dashboard</h2>
-
-      {/* //* DataBox component will display count variables to display data in a
+      <section className="topSection">
+        {/* //* DataBox component will display count variables to display data in a
       //*  stylized number format   */}
-      <section className="appDetails">
-        <DataBox number={totalApps} tag={"Total Applications"} />
-        <DataBox number={interviewCount} tag={"Interviewed"} />
-        <DataBox number={rejectedCount} tag={"Rejected"} />
-        <DataBox number={offerCount} tag={"Offered"} />
-        <DataBox number={ghostedCount} tag={"Ghosted"} />
-      </section>
-
-      <section className="topRow">
-        {/* Pie Chart Section */}
-        <section className="pieChartSection">
-          <h3>Status Breakdown</h3>
-
-          {/* Implementing Pie Chart component */}
-          <AppPieChart statusData={statusData} />
+        <section className="appDetails">
+          <DataBox number={totalApps} tag={"Total Applications"} />
+          <DataBox number={interviewCount} tag={"Interviewed"} />
+          <DataBox number={rejectedCount} tag={"Rejected"} />
+          <DataBox number={offerCount} tag={"Offered"} />
+          <DataBox number={ghostedCount} tag={"Ghosted"} />
         </section>
 
-        {/* Recent Applications Section  */}
-        <section className="recentApps">
-          <h3>Recent Activity</h3>
-          <ul>
-            {/* //* Component renders list of 4 most recent applications completed */}
-            <RecentActivity recentApps={recentApps} />
-          </ul>
-        </section>
+        <section className="topRow">
+          {/* Pie Chart Section */}
+          <section className="pieChartSection">
+            <h3>Status Breakdown</h3>
 
-        {/* Follow-ups Section*/}
-        <section className="followUpSection">
-          <section className="followUpToggle">
-            {/* //* Conditional render; if "toggle" is true, "upcoming" title is displayed. 
-            //* If false, "overdue" title is displayed */}
-            <h3>
-              {toggle === "upcoming"
-                ? "Upcoming Follow-Ups"
-                : "Overdue Follow-ups"}
-            </h3>
-            {/* //* Implementing toggle/tab feature. Will render two tabs for user to alternate 
-            //* between; "Upcoming" & "Overdue". UseState var tracks current toggle */}
-            <FollowUpToggle toggle={toggle} setToggle={setToggle} />
+            {/* Implementing Pie Chart component */}
+            <AppPieChart statusData={statusData} />
           </section>
-          {/* //* Different follow-up lists are rendered depending on "toggle" useState var. If "toggle" 
+
+          {/* Recent Applications Section  */}
+          <section className="recentApps">
+            <h3>Recent Activity</h3>
+            <ul>
+              {/* //* Component renders list of 4 most recent applications completed */}
+              <RecentActivity recentApps={recentApps} />
+            </ul>
+          </section>
+
+          {/* Follow-ups Section*/}
+          <section className="followUpSection">
+            <section className="followUpToggle">
+              {/* //* Conditional render; if "toggle" is true, "upcoming" title is displayed. 
+            //* If false, "overdue" title is displayed */}
+              <h3>
+                {toggle === "upcoming"
+                  ? "Upcoming Follow-Ups"
+                  : "Overdue Follow-ups"}
+              </h3>
+              {/* //* Implementing toggle/tab feature. Will render two tabs for user to alternate 
+            //* between; "Upcoming" & "Overdue". UseState var tracks current toggle */}
+              <FollowUpToggle toggle={toggle} setToggle={setToggle} />
+            </section>
+            {/* //* Different follow-up lists are rendered depending on "toggle" useState var. If "toggle" 
           //* "toggle" true, displays "Upcoming". If false, displays "Overdue"  */}
-          <FollowUps applications={applications} toggle={toggle} />
+            <FollowUps applications={applications} toggle={toggle} />
+          </section>
+        </section>
+
+        {/*AREA CHART SECTION  */}
+        <section>
+          <AppAreaChart applications={applications} />
         </section>
       </section>
-
-      {/*AREA CHART SECTION  */}
-      <section>
-        <AppAreaChart applications={applications} />
-      </section>
-    </section>
+    </>
   );
 }
 
