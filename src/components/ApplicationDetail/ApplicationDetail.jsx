@@ -115,6 +115,10 @@ export default function ApplicationDetail() {
                   <span>{application.status}</span>
                 </div>
                 <div className="info-field">
+                  <label>Job URL</label>
+                  <span>{application.job_url}</span>
+                </div>
+                <div className="info-field">
                   <label>Date Applied</label>
                   <span>{formatDateDMY(application.date_applied)}</span>
                 </div>
