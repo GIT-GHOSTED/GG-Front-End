@@ -3,7 +3,8 @@
 /* //* Main container for entire dashboard page layout */
 .topSection {
   display: grid;
-  align-content: space-evenly;
+  align-content: space-between;
+  gap: 25px;
 }
 
 /* //* Layout for top row: pie chart on left, follow-ups on right */
@@ -17,13 +18,12 @@
 
 /* //* ---------------- TOP ROW FIXED HEIGHT ---------------- */
 
-/* Top row sections all same height */
-.topRow > section {
-  height: 330px; /* fixed height for all three sections */
+/* .topRow > section {
+  height: 330px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* distributes content vertically */
-}
+  justify-content: space-between;
+} */
 
 /* Limit list height to parent section */
 .recentApps ul,
@@ -34,9 +34,8 @@
   overflow-y: auto;
 }
 
-/* Optional: Make headers and numbers scale slightly */
 .topRow h3 {
-  font-size: 1rem; /* scales better inside smaller sections */
+  font-size: 1rem;
 }
 
 .dataBox p {

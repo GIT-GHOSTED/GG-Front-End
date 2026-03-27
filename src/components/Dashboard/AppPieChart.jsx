@@ -19,8 +19,8 @@ export default function AppPieChart({ statusData }) {
         <Pie
           data={statusData}
           cx="50%"
-          cy="40%"
-          outerRadius="83%"
+          cy="50%"
+          outerRadius="100%"
           dataKey="value"
         >
           {statusData.map((entry, index) => (
