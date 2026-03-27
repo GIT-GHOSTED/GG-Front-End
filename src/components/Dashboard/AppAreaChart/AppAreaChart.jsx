@@ -1,3 +1,4 @@
+import "./AppAreaChart.css";
 import {
   AreaChart,
   Area,
@@ -16,7 +17,7 @@ import {
 function groupApplicationsByMonth(applications) {
   const map = {};
 
-  applications.map((currApp) => {
+  applications.forEach((currApp) => {
     if (!currApp.date_applied) return;
 
     const date = new Date(currApp.date_applied);
@@ -46,7 +47,9 @@ export default function AppAreaChart({ applications }) {
   const data = groupApplicationsByMonth(applications);
 
   return (
-    <section style={{ width: "100%", height: "200px" }}>
+    <section className="app-area-chart-section">
+      <h3>Applications Over Time</h3>
+
       <ResponsiveContainer width="100%" height="100%">
         <AreaChart
           data={data}

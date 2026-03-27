@@ -109,7 +109,6 @@ export default function Dashboard() {
 
       {/*AREA CHART SECTION  */}
       <section>
-        <h3>Applications Over Time</h3>
         <AppAreaChart applications={applications} />
       </section>
     </section>

@@ -1,0 +1,22 @@
+/* AppAreaChart.css */
+
+/* Main container: matches other dashboard cards like pieChartSection */
+.app-area-chart-section {
+  background-color: #f9fafb; /* same as pieChartSection & recentApps */
+  padding: 15px;
+  border-radius: 12px;
+  margin-top: 20px;
+  width: 100%;
+  height: 200px; /* you can adjust if needed */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Optional: Make chart responsive for small screens */
+@media (max-width: 768px) {
+  .app-area-chart-section {
+    height: 300px;
+    padding: 12px;
+  }
+}
