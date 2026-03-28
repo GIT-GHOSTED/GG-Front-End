@@ -162,8 +162,8 @@ export default function EditApplication() {
             Status
             <select value={formData.status} onChange={setField("status")}>
               <option value="applied">Applied</option>
-              <option value="interview">Interviewed</option>
-              <option value="offer">Offered</option>
+              <option value="interviewed">Interviewed</option>
+              <option value="offered">Offered</option>
               <option value="rejected">Rejected</option>
               <option value="ghosted">Ghosted</option>
             </select>
