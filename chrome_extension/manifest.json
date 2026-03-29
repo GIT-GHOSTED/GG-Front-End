@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "git_ghosted",
-  "version": 1.0,
-  "description": "Use the new application form from git_ghosted on your browser",
+  "name": "Git-Ghosted",
+  "version": "1.0.0",
+  "description": "Chrome extension version of our React app",
   "action": {
     "default_popup": "index.html"
   },

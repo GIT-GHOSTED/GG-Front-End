@@ -10,6 +10,8 @@ import Applications from "./components/Applications/Applications";
 import ApplicationDetail from "./components/ApplicationDetail/ApplicationDetail";
 import EditApplication from "./components/EditApplication/EditApplication";
 import Layout from "./components/Layout/Layout";
+const isPopup = window.location.href.includes("chrome-extension://");
+if (isPopup) import("./popup.css"); // loads only in the Chrome extension
 
 export default function App() {
   // Step 1: Initialize auth token state from localStorage so refreshes keep login state.
