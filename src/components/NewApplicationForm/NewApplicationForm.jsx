@@ -43,6 +43,7 @@ export default function NewApplicationForm({ showForm, setShowForm }) {
    * @param {React.FormEvent<HTMLFormElement>} event
    */
   const createNewApp = async (event) => {
+    console.log(formData); //fix DELETE
     event.preventDefault();
 
     try {
