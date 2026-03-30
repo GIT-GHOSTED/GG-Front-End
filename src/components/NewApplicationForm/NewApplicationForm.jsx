@@ -21,7 +21,10 @@ export default function NewApplicationForm({ showForm, setShowForm }) {
     followUpDate: "",
   });
 
-  const API = import.meta.env.VITE_API_URL;
+  const API = (import.meta.env.VITE_API_URL || "http://localhost:3000").replace(
+    /\/+$/,
+    "",
+  );
   const token = localStorage.getItem("token");
   const { loadApplications } = useApplications();
 

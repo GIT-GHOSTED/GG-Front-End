@@ -23,4 +23,5 @@ body {
   transition:
     background-color 0.2s ease,
     color 0.2s ease;
+  font-family: Helvetica, Arial, sans-serif;
 }
