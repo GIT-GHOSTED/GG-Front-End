@@ -6,9 +6,19 @@
 
 .applications-header {
   display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.applications-header-top {
+  display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2rem;
+}
+
+.applications-header-bottom {
+  width: 100%;
 }
 
 .applications-header h2 {
