@@ -36,8 +36,8 @@ export default function Applications() {
     const search = searchInput.toLowerCase();
 
     return (
-      application.company?.includes(search) ||
-      application.role?.includes(search)
+      application.company?.toLowerCase().includes(search) ||
+      application.role?.toLowerCase().includes(search)
     );
   });
 
@@ -45,20 +45,25 @@ export default function Applications() {
   return (
     <section className="applications">
       <div className="applications-header">
-        <h2>Applications</h2>
+        {/* Top row */}
+        <div className="applications-header-top">
+          <h2>Applications</h2>
 
-        {/* Search bar form Ant-d */}
-        <Input
-          placeholder="Search by company or role..."
-          value={searchInput}
-          onChange={(e) => setSearchInput(e.target.value)}
-          style={{ width: 250, marginRight: "10px" }}
-          allowClear
-        />
+          <Button type="primary" onClick={() => setShowForm(!showForm)}>
+            New Application
+          </Button>
+        </div>
 
-        <Button type="primary" onClick={() => setShowForm(!showForm)}>
-          New Application
-        </Button>
+        {/* Bottom row */}
+        <div className="applications-header-bottom">
+          {/* Search bar form Ant-d */}
+          <Input
+            placeholder="Search by company or role..."
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
+            allowClear
+          />
+        </div>
       </div>
 
       {/* Step 3a: Show message if no applications exist */}
