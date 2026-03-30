@@ -100,42 +100,56 @@ export default function ApplicationDetail() {
       {application ? (
         <>
           <div className="application-detail-content">
-            <div className="application-info-block">
-              <div className="info-grid">
-                <div className="info-field">
-                  <label>Company</label>
-                  <span>{application.company}</span>
+            {/* ✅ Top row with two boxes */}
+            <div className="application-detail-top">
+              {/* LEFT BOX */}
+              <div className="application-info-block">
+                <h3>Application Info</h3>
+                <div className="info-grid">
+                  <div className="info-field">
+                    <label>Company</label>
+                    <span>{application.company}</span>
+                  </div>
+                  <div className="info-field">
+                    <label>Role</label>
+                    <span>{application.role}</span>
+                  </div>
+                  <div className="info-field">
+                    <label>Status</label>
+                    <span>{application.status}</span>
+                  </div>
+                  <div className="info-field">
+                    <label>Date Applied</label>
+                    <span>{formatDateDMY(application.date_applied)}</span>
+                  </div>
                 </div>
-                <div className="info-field">
-                  <label>Role</label>
-                  <span>{application.role}</span>
-                </div>
-                <div className="info-field">
-                  <label>Status</label>
-                  <span>{application.status}</span>
-                </div>
-                <div className="info-field">
-                  <label>Job URL</label>
-                  <span>{application.job_url}</span>
-                </div>
-                <div className="info-field">
-                  <label>Date Applied</label>
-                  <span>{formatDateDMY(application.date_applied)}</span>
-                </div>
-                <div className="info-field">
-                  <label>Contact Name</label>
-                  <span>{application.contact_name}</span>
-                </div>
-                <div className="info-field">
-                  <label>Contact Email</label>
-                  <span>{application.contact_email}</span>
-                </div>
-                <div className="info-field">
-                  <label>Follow-up Date</label>
-                  <span>{formatDateDMY(application.followup_date)}</span>
+              </div>
+
+              {/* RIGHT BOX */}
+              <div className="application-info-block">
+                <h3>Contact / Job Info</h3>
+                <div className="info-grid">
+                  <div className="info-field">
+                    <label>Contact Name</label>
+                    <span>{application.contact_name}</span>
+                  </div>
+                  <div className="info-field">
+                    <label>Contact Email</label>
+                    <span>{application.contact_email}</span>
+                  </div>
+                  <div className="info-field">
+                    <label>Follow-up Date</label>
+                    <span>{formatDateDMY(application.followup_date)}</span>
+                  </div>
+                  <div className="info-field">
+                    <label>Job URL</label>
+                    <span>{application.job_url}</span>
+                  </div>
                 </div>
               </div>
             </div>
+
+            {/* Notes section */}
             <div className="notes-section">
               <label>Notes</label>
               <div className="notes-content">
@@ -143,6 +157,7 @@ export default function ApplicationDetail() {
               </div>
             </div>
           </div>
+
           {/* Back button at bottom */}
           <div className="back-button-container">
             <Link to="/applications" className="back-button">
