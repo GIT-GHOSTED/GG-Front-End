@@ -1,8 +1,10 @@
 import "./FollowUps.css";
+import { useNavigate } from "react-router";
 
 //* Component filters and displays follow-up tasks based on
 //* selected toggle (upcoming or overdue)
 export default function FollowUps({ applications, toggle }) {
+  const navigate = useNavigate();
   //* Creates date object for today and normalize time to start of day
   const today = new Date();
   today.setHours(0, 0, 0, 0);
@@ -49,7 +51,11 @@ export default function FollowUps({ applications, toggle }) {
       <ul>
         {/* //* Maps through sorted follow-ups and renders each as a list item */}
         {sortedFollowUps.map((currApp) => (
-          <li key={currApp.id} className="followUpList">
+          <li
+            key={currApp.id}
+            className="followUpList"
+            onClick={() => navigate(`/applications/${currApp.id}`)}
+          >
             <section>
               <p>{currApp.company}</p>
               <p>{currApp.role}</p>
