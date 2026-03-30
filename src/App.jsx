@@ -16,6 +16,7 @@ const isPopup = window.location.href.includes("chrome-extension://");
 if (isPopup) import("./popup.css"); // loads only in the Chrome extension
 
 export default function App() {
+  const [showForm, setShowForm] = useState(true);
   // Step 1: Initialize auth token state from localStorage so refreshes keep login state.
   const [token, setToken] = useState(localStorage.getItem(`token`));
   // Step 1a: Initialize color theme mode from localStorage (defaults to dark).
@@ -96,7 +97,16 @@ export default function App() {
             {/* Step 6a: Protected dashboard page. */}
             <Route
               path="/dashboard"
-              element={isPopup ? <NewApplicationForm /> : <Dashboard />}
+              element={
+                isPopup ? (
+                  <NewApplicationForm
+                    showForm={showForm}
+                    setShowForm={setShowForm}
+                  />
+                ) : (
+                  <Dashboard />
+                )
+              }
             />
 
             {/* Step 6b: Protected applications list page. */}
