@@ -9,8 +9,10 @@ import Dashboard from "./components/Dashboard/Dashboard";
 import Applications from "./components/Applications/Applications";
 import ApplicationDetail from "./components/ApplicationDetail/ApplicationDetail";
 import EditApplication from "./components/EditApplication/EditApplication";
+import NewApplicationForm from "./components/NewApplicationForm/NewApplicationForm";
 import Layout from "./components/Layout/Layout";
 const isPopup = window.location.href.includes("chrome-extension://");
+
 if (isPopup) import("./popup.css"); // loads only in the Chrome extension
 
 export default function App() {
@@ -92,7 +94,10 @@ export default function App() {
             }
           >
             {/* Step 6a: Protected dashboard page. */}
-            <Route path="/dashboard" element={<Dashboard />} />
+            <Route
+              path="/dashboard"
+              element={isPopup ? <NewApplicationForm /> : <Dashboard />}
+            />
 
             {/* Step 6b: Protected applications list page. */}
             <Route path="/applications" element={<Applications />} />
