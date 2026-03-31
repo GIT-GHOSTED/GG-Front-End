@@ -58,9 +58,9 @@ export default function EditApplication() {
           status: application.status || "Saved",
           date_applied: toDateInputValue(application.date_applied),
           notes: application.notes || "",
-          contactName: application.contactName || "",
-          contactEmail: application.contactEmail || "",
-          followUpDate: toDateInputValue(application.followUpDate),
+          contactName: application.contact_name || "",
+          contactEmail: application.contact_email || "",
+          followUpDate: toDateInputValue(application.followup_date), // ✅ fixed key
         });
       } catch (err) {
         setError(err.message);
