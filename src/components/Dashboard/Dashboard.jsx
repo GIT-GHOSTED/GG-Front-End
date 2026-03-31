@@ -5,6 +5,7 @@ import FollowUps from "../FollowUps/FollowUps";
 import FollowUpToggle from "../FollowUps/FollowUpToggle";
 import AppAreaChart from "./AppAreaChart/AppAreaChart";
 import AppPieChart from "./AppPieChart";
+import { useNavigate } from "react-router";
 
 export default function Dashboard() {
   const { applications } = useApplications();
@@ -130,8 +131,13 @@ function DataBox({ number, tag }) {
 
 //* Used to display the user's 4 recent application in a clean row/list format
 function RecentActivity({ recentApps }) {
+  const navigate = useNavigate();
   return recentApps.map((currApp, index) => (
-    <li className="recentAppList" key={index}>
+    <li
+      className="recentAppList"
+      key={index}
+      onClick={() => navigate(`/applications/${currApp.id}`)}
+    >
       <section>
         <p>{currApp.company}</p>
         <p>{currApp.role}</p>

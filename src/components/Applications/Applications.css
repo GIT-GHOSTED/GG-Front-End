@@ -19,6 +19,7 @@
 
 .applications-header-bottom {
   width: 100%;
+  display: flex;
 }
 
 .applications-header h2 {

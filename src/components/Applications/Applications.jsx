@@ -2,7 +2,7 @@ import { Link } from "react-router";
 import { useState } from "react";
 import NewApplicationForm from "../NewApplicationForm/NewApplicationForm";
 import { useApplications } from "../../context/applicationsContext";
-import { Button, Input } from "antd";
+import { Button, Input, Select } from "antd";
 import "./Applications.css";
 
 export default function Applications() {
@@ -14,6 +14,7 @@ export default function Applications() {
 
   //  Search bar input
   const [searchInput, setSearchInput] = useState("");
+  const [statusFilter, setStatusFilter] = useState("");
 
   // Helper function to format date
   const formatDate = (dateString) => {
@@ -31,14 +32,19 @@ export default function Applications() {
     return `status-badge status-${status?.toLowerCase() || "applied"}`;
   };
 
-  //Filter applications based on the search input (company or role)
-  const filteredApplications = applications.filter((application) => {
+  //Filter applications based on the search input (company or role) and status
+  const filteredApplications = applications.filter((currApp) => {
     const search = searchInput.toLowerCase();
 
-    return (
-      application.company?.toLowerCase().includes(search) ||
-      application.role?.toLowerCase().includes(search)
-    );
+    const matchesSearch =
+      !search ||
+      currApp.company?.toLowerCase().includes(search) ||
+      currApp.role?.toLowerCase().includes(search);
+
+    const matchesStatus =
+      !statusFilter || currApp.status?.toLowerCase() === statusFilter;
+
+    return matchesSearch && matchesStatus;
   });
 
   // Step 3: Render the applications grid UI
@@ -62,6 +68,21 @@ export default function Applications() {
             value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}
             allowClear
+          />
+
+          <Select
+            placeholder="Filter by status"
+            value={statusFilter || undefined}
+            onChange={(value) => setStatusFilter(value)}
+            style={{ width: 180 }}
+            allowClear
+            options={[
+              { value: "applied", label: "Applied" },
+              { value: "interviewed", label: "Interviewed" },
+              { value: "offered", label: "Offered" },
+              { value: "rejected", label: "Rejected" },
+              { value: "ghosted", label: "Ghosted" },
+            ]}
           />
         </div>
       </div>
