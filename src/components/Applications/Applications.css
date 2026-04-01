@@ -121,6 +121,11 @@
   color: #5c0206;
 }
 
+.status-ghosted {
+  background-color: #000000;
+  color: #ffffff;
+}
+
 /* Card Body (Role + Date) */
 .card-body {
   flex: 1;
@@ -207,4 +212,9 @@
   .company-name {
     font-size: 1.125rem;
   }
+}
+
+body[data-theme="dark"] .status-ghosted {
+  background-color: #ffffff;
+  color: #000000;
 }

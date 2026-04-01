@@ -21,7 +21,11 @@ export function ApplicationsProvider({ children }) {
       const data = await api.getApplications(token);
 
       // Step 4d: Save returned applications (or fallback to empty array).
-      setApplications(data.applications || []);
+      const sortedApps = (data.applications || []).sort((a, b) => {
+        return new Date(b.date_applied) - new Date(a.date_applied);
+      });
+
+      setApplications(sortedApps);
     } catch (err) {
       // Step 4e: Show fetch error if request fails.
       setError(err.message);

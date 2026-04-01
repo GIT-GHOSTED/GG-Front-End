@@ -60,7 +60,7 @@ export default function EditApplication() {
           notes: application.notes || "",
           contactName: application.contact_name || "",
           contactEmail: application.contact_email || "",
-          followUpDate: toDateInputValue(application.followup_date), // ✅ fixed key
+          followUpDate: toDateInputValue(application.followup_date),
         });
       } catch (err) {
         setError(err.message);
